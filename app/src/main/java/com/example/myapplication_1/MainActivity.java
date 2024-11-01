@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.myapplication_1.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,3 +35,4 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 }
+

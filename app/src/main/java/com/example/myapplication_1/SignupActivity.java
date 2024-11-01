@@ -6,6 +6,8 @@ import android.widget.Button;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.myapplication_1.R;
+
 public class SignupActivity extends AppCompatActivity {
 
     @Override
