@@ -1,0 +1,68 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <!-- LOGIN Text -->
+
+    <!-- Kakao Login Layout -->
+    <TextView
+        android:layout_width="82dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="LOGIN"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_width="49dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/kakao" />
+
+        <Button
+            android:id="@+id/btn_option1"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#E0B01F"
+            android:text="KAKAO 로그인"
+            android:layout_marginStart="10dp" />
+    </LinearLayout>
+
+    <!-- Spacing between login options -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="16dp" />
+
+    <!-- Google Login Layout -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_width="43dp"
+            android:layout_height="42dp"
+            android:src="@drawable/google" />
+
+        <Button
+            android:id="@+id/btn_option2"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#2196F3"
+            android:text="G-MAIL 로그인"
+            app:iconTint="#A93939"
+            app:rippleColor="#E91E63"
+            android:layout_marginStart="10dp" />
+    </LinearLayout>
+
+</LinearLayout>
+
