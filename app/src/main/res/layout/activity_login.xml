@@ -5,15 +5,12 @@
     android:orientation="vertical"
     android:gravity="center">
 
-    <!-- LOGIN Text -->
-
-    <!-- Kakao Login Layout -->
     <TextView
-        android:layout_width="82dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="250dp"
         android:text="LOGIN"
-        android:textSize="24sp"
+        android:textSize="50sp"
         android:textStyle="bold" />
 
     <LinearLayout
@@ -36,7 +33,7 @@
             android:layout_marginStart="10dp" />
     </LinearLayout>
 
-    <!-- Spacing between login options -->
+
     <View
         android:layout_width="match_parent"
         android:layout_height="16dp" />
@@ -57,11 +54,11 @@
             android:id="@+id/btn_option2"
             android:layout_width="170dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:backgroundTint="#2196F3"
             android:text="G-MAIL 로그인"
             app:iconTint="#A93939"
-            app:rippleColor="#E91E63"
-            android:layout_marginStart="10dp" />
+            app:rippleColor="#E91E63" />
     </LinearLayout>
 
 </LinearLayout>

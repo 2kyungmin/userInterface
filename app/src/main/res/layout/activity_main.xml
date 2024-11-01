@@ -4,12 +4,30 @@
     android:orientation="vertical"
     android:gravity="center">
 
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="5-GO 챌린지"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="50dp" />
+
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:src="@drawable/appimage"
+        android:layout_marginBottom="50dp" />
+
+
     <Button
         android:id="@+id/btn_signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#9D9797"
-        android:text="회원가입" />
+        android:text="회원가입"
+        android:layout_marginBottom="10dp" />
+
 
     <Button
         android:id="@+id/btn_login"
@@ -17,4 +35,6 @@
         android:layout_height="wrap_content"
         android:backgroundTint="#908686"
         android:text="로그인" />
+
 </LinearLayout>
+
