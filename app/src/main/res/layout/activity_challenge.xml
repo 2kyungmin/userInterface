@@ -1,0 +1,129 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E6E6FA"> <!-- 연보라색 배경 -->
+
+    <!-- 설정 버튼 -->
+    <ImageButton
+        android:id="@+id/settingsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:src="@android:drawable/ic_menu_preferences"
+        android:contentDescription="설정" />
+
+    <!-- 제목 -->
+    <!-- 중앙 정렬 추가 -->
+
+    <TextView
+        android:id="@+id/titleText"
+        android:layout_width="match_parent"
+        android:layout_height="66dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="1dp"
+        android:fontFamily="sans-serif-thin"
+        android:gravity="center"
+        android:text="선택하신 챌린지"
+        android:textColor="#000000"
+        android:textSize="34sp" />
+
+    <TextView
+        android:id="@+id/subtitleText"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_below="@+id/titleText"
+        android:layout_marginTop="2dp"
+        android:text="5분 플랭크"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        android:gravity="center" /> <!-- 중앙 정렬 추가 -->
+
+    <ImageView
+        android:id="@+id/challengeImage"
+        android:layout_width="match_parent"
+        android:layout_height="268dp"
+        android:layout_below="@id/subtitleText"
+        android:layout_marginTop="50dp"
+        android:contentDescription="챌린지 이미지"
+        android:src="@drawable/sport" />
+
+    <TextView
+        android:id="@+id/messageText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/challengeImage"
+        android:layout_marginTop="49dp"
+        android:fontFamily="sans-serif-thin"
+        android:text="챌린지를 시작하겠습니까?"
+        android:textColor="#673AB7"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center" /> <!-- 중앙 정렬 추가 -->
+
+    <!-- Yes/No 버튼을 포함하는 LinearLayout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/messageText"
+        android:orientation="horizontal"
+        android:gravity="center"
+    android:layout_marginTop="16dp">
+
+    <Button
+        android:id="@+id/noButton"
+        android:layout_width="0dp"
+        android:layout_height="58dp"
+        android:layout_weight="1"
+        android:text="No"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/yesButton"
+        android:layout_width="0dp"
+        android:layout_height="58dp"
+        android:layout_weight="1"
+        android:text="Yes"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:layout_marginStart="16dp" /> <!-- Yes 버튼과의 간격 추가 -->
+
+</LinearLayout>
+
+<LinearLayout
+android:id="@+id/menuBar"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:layout_alignParentBottom="true"
+android:orientation="horizontal"
+android:gravity="center">
+
+<TextView
+    android:layout_width="0dp"
+    android:layout_height="73dp"
+    android:layout_weight="1"
+    android:gravity="center"
+    android:text="🗨️ 커뮤니티"
+    android:textSize="14sp"
+    android:textStyle="bold" />
+
+<TextView
+    android:layout_width="0dp"
+    android:layout_height="73dp"
+    android:layout_weight="1"
+    android:gravity="center"
+    android:text="🏆 내 챌린지"
+    android:textSize="14sp"
+    android:textStyle="bold" />
+
+<TextView
+    android:layout_width="0dp"
+    android:layout_height="73dp"
+    android:layout_weight="1"
+    android:gravity="center"
+    android:text="📅 달력"
+    android:textSize="14sp"
+    android:textStyle="bold" />
+</LinearLayout>
+    </RelativeLayout>
