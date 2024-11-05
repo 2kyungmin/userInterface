@@ -1,4 +1,4 @@
-package com.example.myapplication_1;
+package com.example.myapplication_1.activity;
 
 import android.os.Bundle;
 import android.view.View;
@@ -12,7 +12,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
-    public class AfterActivity extends AppCompatActivity {
+import com.example.myapplication_1.R;
+
+public class AfterActivity extends AppCompatActivity {
 
         private ImageButton settingsButton;
         private TextView titleText;
