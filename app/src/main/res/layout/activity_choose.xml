@@ -2,77 +2,89 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:gravity="center"
+    android:background="#FFCCCB">
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
-        android:gravity="center"
-        android:text="5-GO! 챌린지"
-        android:textSize="50sp"
-        android:textStyle="bold" />
+        android:text="5-GO"
+        android:textSize="70sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CHALLENGE"
+        android:textSize="30sp"
+        android:textStyle="bold"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="#E0E0E0"
+        android:layout_margin="20dp"
+        android:background="#F4EDED"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="20dp">
 
         <EditText
             android:id="@+id/editTextName"
         android:layout_width="match_parent"
-        android:layout_height="86dp"
-        android:hint="이름을 입력하세요" />
+        android:layout_height="80dp"
+        android:hint="닉네임을입력하세요"
+            android:gravity="center" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:text="선택할 목표"
-            android:textSize="20sp" />
+            android:layout_marginTop="30dp"
+            android:text="오늘의목표선택"
+            android:textSize="25sp"
+            android:textStyle="bold"/>
 
         <RadioGroup
             android:id="@+id/radioGroupGoals"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp">
+        android:layout_marginTop="5dp"
+            >
 
         <RadioButton
             android:id="@+id/RadioExercise"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="운동" />
+            android:text="운동 5-GO"
+            android:textStyle="bold"/>
 
         <RadioButton
             android:id="@+id/RadioReading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="독서" />
+            android:text="독서 5-GO"
+            android:textStyle="bold"/>
 
         <RadioButton
             android:id="@+id/RadioHealth"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="건강" />
+            android:text="건강 5-GO"
+            android:textStyle="bold"/>
 
         <RadioButton
             android:id="@+id/RadioEnglishWords"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="영단어" />
+            android:text="영단어 5-GO"
+            android:textStyle="bold"/>
     </RadioGroup>
 </LinearLayout>
 
 <Button
 android:id="@+id/buttonStart"
-    android:layout_width="wrap_content"
+    android:layout_width="300dp"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:layout_marginTop="16dp"
-    android:backgroundTint="#7F8177"
-    android:text="시작" />
-
+    android:backgroundTint="#D93030"
+    android:text="시작"
+    android:textStyle="bold"/>
     </LinearLayout>
