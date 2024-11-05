@@ -1,4 +1,4 @@
-package com.example.myapplication_1;
+package com.example.myapplication_1.activity;
 
 import android.os.Bundle;
 import android.view.View;
@@ -12,7 +12,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
-    public class AfterActivity extends AppCompatActivity {
+import com.example.myapplication_1.R;
+
+public class AfterActivity extends AppCompatActivity {
 
         private ImageButton settingsButton;
         private TextView titleText;
@@ -32,20 +34,19 @@ import androidx.appcompat.app.AppCompatActivity;
             titleText = findViewById(R.id.titleText);
             subtitleText = findViewById(R.id.subtitleText);
             challengeImage = findViewById(R.id.challengeImage);
-            emotionGroup = findViewById(R.id.emotionGroup);
             inputText = findViewById(R.id.inputText);
             registerButton = findViewById(R.id.registerButton);
 
-            // 설정 버튼 클릭 리스너
+
             settingsButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // 설정 버튼 클릭 시 동작
+
                     Toast.makeText(AfterActivity.this, "설정 버튼 클릭됨", Toast.LENGTH_SHORT).show();
                 }
             });
 
-            // 등록하기 버튼 클릭 리스너
+
             registerButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -53,12 +54,12 @@ import androidx.appcompat.app.AppCompatActivity;
                     int selectedId = emotionGroup.getCheckedRadioButtonId();
                     RadioButton selectedEmoji = findViewById(selectedId);
 
-                    // 입력된 내용을 처리하는 로직
+
                     if (!input.isEmpty() && selectedId != -1) {
                         String emoji = selectedEmoji.getText().toString();
                         Toast.makeText(AfterActivity.this, "등록 완료: " + input + " " + emoji, Toast.LENGTH_SHORT).show();
-                        inputText.setText(""); // 입력창 초기화
-                        emotionGroup.clearCheck(); // 이모티콘 선택 초기화
+                        inputText.setText("");
+                        emotionGroup.clearCheck();
                     } else {
                         Toast.makeText(AfterActivity.this, "내용과 감정을 입력하세요.", Toast.LENGTH_SHORT).show();
                     }

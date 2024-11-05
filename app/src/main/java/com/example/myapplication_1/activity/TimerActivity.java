@@ -1,44 +1,36 @@
-package com.example.myapplication_1;
+package com.example.myapplication_1.activity;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import com.example.myapplication_1.R;
+import com.example.myapplication_1.databinding.ActivityTimerBinding;
 
 public class TimerActivity extends AppCompatActivity {
 
-    private TextView timerText;
-    private ImageView clockImage;
-    private Button startButton;
-    private Button resetButton;
-
+    private ActivityTimerBinding binding;
     private CountDownTimer timer;
-    private long remainingTime = 300000; // 5분 (300000 밀리초)
+    private long remainingTime = 300000;
     private boolean isTimerRunning = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_timer); // XML 레이아웃 사용
+        binding = ActivityTimerBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        timerText = findViewById(R.id.timerText);
-        clockImage = findViewById(R.id.clockImage);
-        startButton = findViewById(R.id.startButton);
-        resetButton = findViewById(R.id.resetButton);
-
-        startButton.setOnClickListener(new View.OnClickListener() {
+        binding.startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startTimer();
             }
         });
 
-        resetButton.setOnClickListener(new View.OnClickListener() {
+        binding.resetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 pauseTimer();
@@ -53,13 +45,13 @@ public class TimerActivity extends AppCompatActivity {
             public void onTick(long millisUntilFinished) {
                 remainingTime = millisUntilFinished;
                 long secondsRemaining = millisUntilFinished / 1000;
-                timerText.setText(String.format("%02d:%02d", secondsRemaining / 60, secondsRemaining % 60));
+                binding.timerText.setText(String.format("%02d:%02d", secondsRemaining / 60, secondsRemaining % 60));
             }
 
             @Override
             public void onFinish() {
-                timerText.setText("00:00");
-                isTimerRunning = false; // 타이머 종료
+                binding.timerText.setText("00:00");
+                isTimerRunning = false;
             }
         }.start();
     }
@@ -67,16 +59,17 @@ public class TimerActivity extends AppCompatActivity {
     private void pauseTimer() {
         if (isTimerRunning) {
             timer.cancel();
-            isTimerRunning = false; // 타이머가 멈춤
+            isTimerRunning = false;
         }
     }
 
     @Override
     public void onBackPressed() {
+        Log.d("TimerActivity", "onBackPressed 호출됨");
         if (isTimerRunning) {
             showExitConfirmationDialog();
         } else {
-            super.onBackPressed(); // 타이머가 실행 중이지 않으면 기본 동작 수행
+            super.onBackPressed();
         }
     }
 
@@ -86,18 +79,17 @@ public class TimerActivity extends AppCompatActivity {
                 .setMessage("챌린지를 종료하시겠습니까?")
                 .setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        pauseTimer(); // 타이머 멈춤
-                        TimerActivity.super.onBackPressed(); // 기본 뒤로가기 동작 수행
+                        pauseTimer();
+                        TimerActivity.super.onBackPressed();
                     }
                 })
                 .setNegativeButton("NO", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss(); // 대화상자 닫기
+                        dialog.dismiss();
                     }
                 })
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
     }
 }
-
 

@@ -29,62 +29,34 @@
 
         <EditText
             android:id="@+id/editTextName"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:hint="닉네임을입력하세요"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:hint="닉네임을 입력하세요"
             android:gravity="center" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:text="오늘의목표선택"
-            android:textSize="25sp"
+            android:text="오늘의 목표 선택"
+            android:textSize="20sp"
             android:textStyle="bold"/>
 
-        <RadioGroup
-            android:id="@+id/radioGroupGoals"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-            >
-
-        <RadioButton
-            android:id="@+id/RadioExercise"
-            android:layout_width="wrap_content"
+        <Spinner
+            android:id="@+id/spinnerGoals"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="운동 5-GO"
-            android:textStyle="bold"/>
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"/>
 
-        <RadioButton
-            android:id="@+id/RadioReading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="독서 5-GO"
-            android:textStyle="bold"/>
-
-        <RadioButton
-            android:id="@+id/RadioHealth"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="건강 5-GO"
-            android:textStyle="bold"/>
-
-        <RadioButton
-            android:id="@+id/RadioEnglishWords"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="영단어 5-GO"
-            android:textStyle="bold"/>
-    </RadioGroup>
-</LinearLayout>
-
-<Button
-android:id="@+id/buttonStart"
-    android:layout_width="300dp"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:backgroundTint="#D93030"
-    android:text="시작"
-    android:textStyle="bold"/>
     </LinearLayout>
+
+    <Button
+        android:id="@+id/buttonStart"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:backgroundTint="#D93030"
+        android:text="시작"
+        android:textStyle="bold"/>
+</LinearLayout>
