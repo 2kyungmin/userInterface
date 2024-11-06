@@ -16,6 +16,16 @@
             android:name=".test.TestActivity"
             android:exported="false" />
         <activity
+            android:name=".test.TestActivity"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+        <activity
             android:name=".activity.AfterActivity"
             android:exported="false" />
         <activity
@@ -26,9 +36,6 @@
             android:exported="false" />
         <activity
             android:name=".activity.ChallengeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".SportActivity"
             android:exported="false" />
         <activity
             android:name=".activity.ChooseActivity"

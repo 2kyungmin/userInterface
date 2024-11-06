@@ -1,8 +1,8 @@
 package com.example.myapplication_1.data;
 
 public enum Category {
-    EXCERCISE, HEALTH, READING, ENGLISH_WORDS;
-    public enum Excercise {
+    EXERCISE, HEALTH, READING, ENGLISH_WORDS;
+    public enum Exercise {
         스쿼트,
         윗몸일으키기,
         팔굽혀펴기,
@@ -22,8 +22,8 @@ public enum Category {
 
     public int getSize(){
         switch (this){
-            case EXCERCISE:
-                return Excercise.values().length;
+            case EXERCISE:
+                return Exercise.values().length;
             case HEALTH:
                 return Health.values().length;
             case READING:
