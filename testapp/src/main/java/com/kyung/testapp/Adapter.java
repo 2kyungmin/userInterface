@@ -1,4 +1,4 @@
-package com.example.myapplication_1.test;
+package com.kyung.testapp;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
@@ -17,7 +17,7 @@ public class Adapter extends FragmentStateAdapter {
     public androidx.fragment.app.Fragment createFragment(int position) {
         Category[] categories = Category.values();
         for(int i=0; i < position; i++){
-            return new com.example.myapplication_1.test.Fragment(categories[i]);
+            return new com.example.myapplication_1.testKM.Fragment(categories[i]);
         }
         return null;
     }

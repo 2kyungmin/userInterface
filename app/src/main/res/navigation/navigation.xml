@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/exerciseFragment"
-        android:name="com.example.myapplication_1.test.ExerciseFragment"
+        android:name="com.example.myapplication_1.testKM.ExerciseFragment"
         android:label="fragment_exercise"
         tools:layout="@layout/fragment_exercise" />
 </navigation>

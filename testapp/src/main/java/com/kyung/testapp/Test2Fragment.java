@@ -1,4 +1,4 @@
-package com.example.myapplication_1.test;
+package com.kyung.testapp;
 
 import android.os.Bundle;
 
