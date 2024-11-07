@@ -1,5 +1,6 @@
 package com.kyung.testapp;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -7,9 +8,7 @@ import android.widget.FrameLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentContainerView;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.kyung.testapp.databinding.ActivityMainBinding;
 
@@ -22,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private List<Fragment> fragments;
     private int currentIndex = 0;
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
