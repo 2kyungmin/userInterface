@@ -29,7 +29,7 @@ public class TimerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_timer); // XML 레이아웃 사용
 
         timerText = findViewById(R.id.timerText);
-        clockImage = findViewById(R.id.clockImage);
+        clockImage = findViewById(R.id.clock);
         startButton = findViewById(R.id.startButton);
         resetButton = findViewById(R.id.resetButton);
 
