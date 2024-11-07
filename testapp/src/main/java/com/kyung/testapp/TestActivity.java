@@ -6,7 +6,7 @@ import android.view.Menu;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import com.example.myapplication_1.databinding.ActivityTestBinding;
+import com.kyung.testapp.databinding.ActivityTestBinding;
 
 public class TestActivity extends AppCompatActivity {
     private ActivityTestBinding binding;

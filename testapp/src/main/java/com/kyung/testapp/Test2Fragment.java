@@ -8,8 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.myapplication_1.R;
-
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link Test2Fragment#newInstance} factory method to
