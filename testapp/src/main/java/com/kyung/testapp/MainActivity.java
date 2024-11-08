@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         fragments.add(new Test2Fragment());
         fragments.add(new Test1Fragment());
         currentIndex = fragments.size() - 1;
-
+        //container에 fragment를 넣는 코드
         for (Fragment f : fragments) {
             getSupportFragmentManager().beginTransaction()
                     .add(binding.fragmentContainer.getId(), f).commit();

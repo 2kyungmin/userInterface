@@ -1,5 +1,6 @@
 plugins {
     id("com.android.application")
+//    id("com.google.gms.google-services")
 }
 
 android {
@@ -40,6 +41,7 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
+    implementation(platform(libs.firebase.bom))
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

@@ -19,20 +19,6 @@ public enum Category {
     public enum EnglishWords{
 
     }
-
-    public int getSize(){
-        switch (this){
-            case EXERCISE:
-                return Exercise.values().length;
-            case HEALTH:
-                return Health.values().length;
-            case READING:
-                return Reading.values().length;
-            case ENGLISH_WORDS:
-                return EnglishWords.values().length;
-        }
-        return -1;
-    }
 }
 
 
