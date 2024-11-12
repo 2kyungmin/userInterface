@@ -85,7 +85,7 @@ public class AuthActivity extends AppCompatActivity {
 
         //이메일, 비밀번호 회원가입
         binding.signBtn.setOnClickListener(v -> {
-            String email = binding.authEmailEditView.toString();
+            String email = binding.authEmailEditView.getText().toString();
             String password = binding.authPasswordEditView.getText().toString();
             LoginApplication.auth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(AuthActivity.this, task -> {

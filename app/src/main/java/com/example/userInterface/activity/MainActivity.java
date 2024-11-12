@@ -2,8 +2,9 @@ package com.example.userInterface.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
-import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -12,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.userInterface.R;
 import com.example.userInterface.application.LoginApplication;
 import com.example.userInterface.databinding.ActivityMainBinding;
-import com.example.userInterface.test.AuthActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -29,6 +29,17 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        // 이미 로그인이 되어 있는 상태라면 자동으로 Activity 전환
+        if(LoginApplication.checkAuth()){
+            binding.googleSign.setVisibility(View.INVISIBLE);
+            binding.emailSign.setVisibility(View.INVISIBLE);
+            binding.btnLogin.setVisibility(View.INVISIBLE);
+            new Handler().postDelayed(() -> {
+                Intent intent = new Intent(MainActivity.this, ChallengeActivity.class);
+                startActivity(intent);
+            }, 2000);
+            finish();
+        }
 
         ActivityResultLauncher<Intent> launcher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
@@ -42,16 +53,20 @@ public class MainActivity extends AppCompatActivity {
                                 .addOnCompleteListener(MainActivity.this, task2 -> {
                                     if (task2.isSuccessful()) {
                                         LoginApplication.email = account.getEmail();
-                                        //회원가입 성공 함수
+                                        startActivity(new Intent(MainActivity.this, SignupActivity.class));
+                                        finish();
                                     } else {
                                         //회원가입 실패 함수
+                                        Toast.makeText(getBaseContext(), "회원가입에 실패하였습니다.", Toast.LENGTH_SHORT).show();
+                                        recreate();
                                     }
                                 });
 
                     } catch (ApiException e) {
                         LoginApplication.auth.signOut();
                         LoginApplication.email = null;
-                        //회원가입 실패 함수
+                        startActivity(new Intent(MainActivity.this, MainActivity.class));
+                        recreate();
                     }
                 });
 
@@ -63,15 +78,14 @@ public class MainActivity extends AppCompatActivity {
                     .build();
             Intent signInIntent = GoogleSignIn.getClient(this, gso).getSignInIntent();
             launcher.launch(signInIntent);
-            startActivity(new Intent(MainActivity.this, SignupActivity.class));
         });
-        binding.emailSign.setOnClickListener(v -> {
 
+        binding.emailSign.setOnClickListener(v -> {
+            startActivity(new Intent(MainActivity.this, ESignActivity.class));
         });
 
         binding.btnLogin.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-            startActivity(intent);
+            startActivity(new Intent(MainActivity.this, ELoginActivity.class));
         });
     }
 }
