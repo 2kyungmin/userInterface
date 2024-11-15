@@ -1,0 +1,49 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center_horizontal"
+    android:background="#FFCCCB">
+
+    <TextView
+        android:id="@+id/titleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="30일 나의 챌린지"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"/>
+
+    <CalendarView
+        android:id="@+id/calendarView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:id="@+id/challengeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="오늘의 챌린지는 빈칸입니다."
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:id="@+id/emotionTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="😊"
+        android:textSize="48sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"/>
+
+    <EditText
+        android:id="@+id/feedbackEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="활동 후기를 기록하세요."
+        android:layout_marginTop="16dp"
+        android:padding="16dp"
+        android:minHeight="64dp"/>
+
+</LinearLayout>

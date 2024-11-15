@@ -1,161 +1,91 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E6E6FA"> <!-- 배경색을 연보라색으로 설정 -->
+    android:background="#FFCCCB">
 
-    <!-- 설정 버튼 -->
-    <ImageButton
-        android:id="@+id/settingsButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:src="@android:drawable/ic_menu_preferences"
-        android:contentDescription="설정" />
-
-    <!-- 제목 -->
-
-    <!-- 소제목 -->
 
     <TextView
         android:id="@+id/titleText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="111dp"
-        android:layout_marginTop="60dp"
-        android:text="내가 진행한 챌린지"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textColor="#000000"
-        android:textSize="24sp" />
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="70dp"
+        android:gravity="center"
+        android:text="완료한 CHALLENGE"
+        android:textSize="40sp"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/subtitleText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="5분 플랭크"
-        android:textSize="20sp"
-        android:textColor="#000000"
-        android:layout_below="@id/titleText"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp" />
-
-    <!-- 이미지 -->
-
-    <!-- 감정 이모티콘 선택 -->
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/titleText"
+        android:text="플랭크 5-GO"
+        android:textSize="30sp"
+        android:gravity="center"
+        android:textStyle="bold"/>
 
     <ImageView
         android:id="@+id/challengeImage"
         android:layout_width="200dp"
-        android:layout_height="178dp"
+        android:layout_height="180dp"
         android:layout_below="@id/subtitleText"
-        android:layout_alignStart="@+id/inputText"
-        android:layout_marginStart="49dp"
-        android:layout_marginTop="4dp"
-        android:contentDescription="챌린지 이미지"
+        android:layout_margin="15dp"
         android:src="@drawable/sport" />
 
-    <RadioGroup
-        android:id="@+id/emotionGroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/challengeImage"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp">
-
-    </RadioGroup>
-
-    <!-- 글 입력창 -->
-    <!-- 최소 높이 추가 -->
-
-    <!-- 등록하기 버튼 -->
-    <!-- 최소 높이 추가 -->
-
-    <!-- 메뉴바 -->
 
     <EditText
         android:id="@+id/inputText"
-        android:layout_width="356dp"
-        android:layout_height="133dp"
-        android:layout_below="@id/emotionGroup"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="23dp"
-        android:layout_marginTop="11dp"
-        android:hint="글을 입력하세요"
-        android:minHeight="48dp"
-        android:padding="10dp" />
+        android:layout_width="350dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="430dp"
+        android:layout_marginLeft="30dp"
+        android:background="#F4EDED"
+        android:gravity="center"
+        android:hint="오늘의 성취도를 기록해보세요"
+        />
 
     <Button
         android:id="@+id/registerButton"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/inputText"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="301dp"
-        android:layout_marginTop="153dp"
-        android:minHeight="48dp"
-        android:text="등록하기" />
-
-    <LinearLayout
-        android:id="@+id/menuBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
-        android:background="#D3D3E6"
-        android:gravity="center">
-
-        <TextView
-            android:layout_width="20dp"
-            android:layout_height="32dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="🗨️ 커뮤니티" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="🏆 내 챌린지"
-            android:gravity="center" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="📅 달력"
-            android:gravity="center" />
-    </LinearLayout>
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="20dp"
+        android:text="등록하기"
+        android:layout_gravity="center"
+        android:backgroundTint="#D93030"/>
 
     <RadioButton
         android:id="@+id/happyEmoji"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/challengeImage"
-        android:layout_marginStart="24dp"
-        android:layout_marginBottom="28dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="20dp"
         android:layout_toEndOf="@+id/challengeImage"
-        android:text="😊" />
+        android:text="😊"
+        android:textSize="30dp"/>
 
     <RadioButton
         android:id="@+id/sadEmoji"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/challengeImage"
-        android:layout_marginStart="25dp"
-        android:layout_marginBottom="79dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="70dp"
         android:layout_toEndOf="@+id/challengeImage"
-        android:text="😢" />
+        android:text="😢"
+        android:textSize="30dp"/>
 
     <RadioButton
         android:id="@+id/angryEmoji"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/challengeImage"
-        android:layout_marginStart="24dp"
-        android:layout_marginBottom="128dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="120dp"
         android:layout_toEndOf="@+id/challengeImage"
-        android:text="😠" />
+        android:text="😠"
+        android:textSize="30dp"/>
 
 </RelativeLayout>

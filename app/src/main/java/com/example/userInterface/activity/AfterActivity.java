@@ -1,5 +1,6 @@
 package com.example.userInterface.activity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -24,6 +25,7 @@ public class AfterActivity extends AppCompatActivity {
         private EditText inputText;
         private Button registerButton;
 
+        @SuppressLint("MissingInflatedId")
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
