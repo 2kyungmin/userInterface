@@ -36,14 +36,9 @@ public class MainActivity extends AppCompatActivity {
         if (Application.checkAuth()) {
             binding.googleSign.setVisibility(View.INVISIBLE);
             binding.googleLogin.setVisibility(View.INVISIBLE);
-            long end = System.currentTimeMillis() + 5000;
-            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-                @Override
-                public void run() {
-//                    startActivity(new Intent(MainActivity.this, SignupActivity.class));
-                    startActivity(new Intent(MainActivity.this, ChallengeActivity.class));
-                    finish();
-                }
+            new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                startActivity(new Intent(MainActivity.this, ChallengeActivity.class));
+                finish();
             }, 1000);
         }
 
