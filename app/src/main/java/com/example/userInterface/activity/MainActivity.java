@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
             binding.googleSign.setVisibility(View.INVISIBLE);
             binding.googleLogin.setVisibility(View.INVISIBLE);
             new Handler(Looper.getMainLooper()).postDelayed(() -> {
-                startActivity(new Intent(MainActivity.this, ChallengeActivity.class));
+                startActivity(new Intent(MainActivity.this, ChooseActivity.class));
                 finish();
             }, 1000);
         }
