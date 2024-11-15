@@ -1,43 +1,48 @@
 package com.example.userInterface.activity;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.Toast;
+import android.util.Log;
+import android.widget.CheckBox;
+
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.userInterface.R;
+import com.example.userInterface.Application;
+import com.example.userInterface.data.Category;
+import com.example.userInterface.databinding.ActivityChooseBinding;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class ChooseActivity extends AppCompatActivity {
-
-    private EditText editTextName;
-    private RadioGroup radioGroupGoals;
-    private Button buttonStart;
+    private ActivityChooseBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_choose);
+        binding = ActivityChooseBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
+        List<Category> categories = new ArrayList<>();
 
-        editTextName = findViewById(R.id.editTextName);
-        radioGroupGoals = findViewById(R.id.radioGroupGoals);
-        buttonStart = findViewById(R.id.buttonStart);
+        for(int i=0; i< Category.values().length; i++){
+            CheckBox checkBox = new CheckBox(this);
+            checkBox.setText(Category.values()[i].getCategoryName());
+            checkBox.setOnCheckedChangeListener((view, isChecked) -> {
+                Log.d("KM", view.getText().toString());
+                if(isChecked)
+                    categories.add(Category.fromString(view.getText().toString()));
+                else categories.remove(Category.fromString(view.getText().toString()));
+            });
+            binding.category.addView(checkBox);
+        }
 
-        buttonStart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String name = editTextName.getText().toString();
-
-                int selectedId = radioGroupGoals.getCheckedRadioButtonId();
-                RadioButton selectedRadioButton = findViewById(selectedId);
-                String goal = selectedRadioButton != null ? selectedRadioButton.getText().toString() : "목표 미선택";
-
-                Toast.makeText(ChooseActivity.this, "이름: " + name + ", 목표: " + goal, Toast.LENGTH_SHORT).show();
-            }
+        binding.buttonStart.setOnClickListener(v -> {
+            Log.d("KM", Application.myUser.toString());
+            Application.myUser.setCategories(categories);
+            Application.db.collection("users")
+                    .document(Application.user.getUid()).set(Application.myUser);
         });
     }
 }

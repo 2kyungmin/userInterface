@@ -1,19 +1,21 @@
-package com.example.userInterface.application;
+package com.example.userInterface;
 
 import android.util.Log;
 
 import androidx.multidex.MultiDexApplication;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.example.userInterface.data.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
-public class LoginApplication extends MultiDexApplication {
+public class Application extends MultiDexApplication {
     public static FirebaseAuth auth;
     public static String email;
     public static FirebaseUser user;
+    public static FirebaseFirestore db;
     public static boolean verified = false;
+    public static User myUser;
 
     public static boolean checkAuth() {
         if (user != null) {
@@ -27,5 +29,7 @@ public class LoginApplication extends MultiDexApplication {
         super.onCreate();
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
+        db = FirebaseFirestore.getInstance();
+        myUser = null;
     }
 }

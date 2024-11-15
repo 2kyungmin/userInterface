@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -12,21 +11,16 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.userInterface.Application;
 import com.example.userInterface.R;
-import com.example.userInterface.application.LoginApplication;
 import com.example.userInterface.databinding.ActivityMainBinding;
-import com.google.android.gms.auth.api.identity.BeginSignInRequest;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.google.firebase.auth.SignInMethodQueryResult;
-
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
@@ -39,14 +33,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         // 이미 로그인이 되어 있는 상태라면 자동으로 Activity 전환
-        if (LoginApplication.checkAuth()) {
+        if (Application.checkAuth()) {
             binding.googleSign.setVisibility(View.INVISIBLE);
             binding.googleLogin.setVisibility(View.INVISIBLE);
-            Toast.makeText(getBaseContext(), LoginApplication.email, Toast.LENGTH_SHORT).show();
             long end = System.currentTimeMillis() + 5000;
             new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
                 @Override
                 public void run() {
+//                    startActivity(new Intent(MainActivity.this, SignupActivity.class));
                     startActivity(new Intent(MainActivity.this, ChallengeActivity.class));
                     finish();
                 }
@@ -60,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
                     Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(o.getData());
                     try {
                         GoogleSignInAccount account = task.getResult(ApiException.class);
-                        LoginApplication.auth.fetchSignInMethodsForEmail(account.getEmail())
+                        Application.auth.fetchSignInMethodsForEmail(account.getEmail())
                                 .addOnCompleteListener(task1 -> {
                                     if (task1.isSuccessful()) {
                                         signUpWithGoogleCredential(account);
@@ -70,8 +64,8 @@ public class MainActivity extends AppCompatActivity {
                                     }
                                 });
                     } catch (ApiException e) {
-                        LoginApplication.auth.signOut();
-                        LoginApplication.email = null;
+                        Application.auth.signOut();
+                        Application.email = null;
                         recreate();
                     }
                 });
@@ -99,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void signUpWithGoogleCredential(GoogleSignInAccount account) {
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
-        LoginApplication.auth.signInWithCredential(credential)
+        Application.auth.signInWithCredential(credential)
                 .addOnCompleteListener(this, task -> {
                     if(isSign && task.isSuccessful()){
                         startActivity(new Intent(MainActivity.this, SignupActivity.class));

@@ -1,17 +1,15 @@
 package com.example.userInterface.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.userInterface.application.LoginApplication;
+import com.example.userInterface.Application;
 import com.example.userInterface.data.User;
 import com.example.userInterface.databinding.ActivitySignupBinding;
-
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import com.google.firebase.firestore.CollectionReference;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -51,7 +49,11 @@ public class SignupActivity extends AppCompatActivity {
             /*
             버튼 클릭시 정보 확인하는 Dialog 제작한 후 확인 클릭시 아래 코드 입력
              */
-
+                Application.myUser = new User(Application.user.getUid(), name, gender, age);
+                CollectionReference users = Application.db.collection("users");
+                users.document(Application.user.getUid()).set(Application.myUser);
+                startActivity(new Intent(SignupActivity.this, ChooseActivity.class));
+                finish();
             }
 
         });
