@@ -44,33 +44,6 @@
             android:orientation="vertical"
             android:padding="20dp">
 
-<!--            <CheckBox-->
-<!--                android:id="@+id/RadioExercise"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="운동 5-GO"-->
-<!--                android:textStyle="bold" />-->
-
-<!--            <CheckBox-->
-<!--                android:id="@+id/RadioReading"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="독서 5-GO"-->
-<!--                android:textStyle="bold" />-->
-
-<!--            <CheckBox-->
-<!--                android:id="@+id/RadioHealth"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="건강 5-GO"-->
-<!--                android:textStyle="bold" />-->
-
-<!--            <CheckBox-->
-<!--                android:id="@+id/RadioEnglishWords"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="영단어 5-GO"-->
-<!--                android:textStyle="bold" />-->
         </LinearLayout>
     </LinearLayout>
 

@@ -14,7 +14,6 @@ public class Application extends MultiDexApplication {
     public static String email;
     public static FirebaseUser user;
     public static FirebaseFirestore db;
-    public static boolean verified = false;
     public static User myUser;
 
     public static boolean checkAuth() {

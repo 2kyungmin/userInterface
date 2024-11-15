@@ -34,12 +34,11 @@
         android:gravity="center"
         android:textStyle="bold"/>
 
-    <ImageView
+    <TextView
         android:id="@+id/challengeImage"
         android:layout_width="match_parent"
         android:layout_height="268dp"
-        android:layout_below="@id/subtitleText"
-        android:src="@drawable/sport" />
+        android:layout_below="@id/subtitleText" />
 
     <TextView
         android:id="@+id/messageText"
