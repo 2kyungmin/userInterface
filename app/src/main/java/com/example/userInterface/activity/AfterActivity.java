@@ -36,7 +36,7 @@ public class AfterActivity extends AppCompatActivity {
             titleText = findViewById(R.id.titleText);
             subtitleText = findViewById(R.id.subtitleText);
             challengeImage = findViewById(R.id.challengeImage);
-            emotionGroup = findViewById(R.id.emotionGroup);
+//            emotionGroup = findViewById(R.id.emotionGroup);
             inputText = findViewById(R.id.inputText);
             registerButton = findViewById(R.id.registerButton);
 

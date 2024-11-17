@@ -16,7 +16,7 @@ import com.example.userInterface.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class communityActivity extends AppCompatActivity {
+public class CommunityActivity extends AppCompatActivity {
 
     private EditText reviewInput;
     private Button submitButton;
@@ -43,7 +43,7 @@ public class communityActivity extends AppCompatActivity {
                     reviewInput.setText(""); // 입력 필드 초기화
                     loadReviews(); // 후기를 다시 불러오기
                 } else {
-                    Toast.makeText(communityActivity.this, "후기를 입력해주세요.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CommunityActivity.this, "후기를 입력해주세요.", Toast.LENGTH_SHORT).show();
                 }
             }
         });

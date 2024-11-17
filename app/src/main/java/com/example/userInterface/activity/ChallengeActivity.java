@@ -28,7 +28,7 @@ public class ChallengeActivity extends AppCompatActivity {
 
         // Intent로부터 선택된 목표를 가져옴
         Intent intent = getIntent();
-        String goal = intent.getStringExtra("goal");
+        Category goal = Category.fromString(intent.getStringExtra("goal"));
 
         // UI 요소 초기화
         titleText = findViewById(R.id.titleText);
@@ -64,8 +64,7 @@ public class ChallengeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // SettingsActivity로 이동
-                Intent settingsIntent = new Intent(ChallengeActivity.this, SettingActivity.class);
-                startActivity(settingsIntent);
+
             }
         });
     }

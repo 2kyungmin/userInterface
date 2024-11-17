@@ -10,9 +10,10 @@ public class User {
     private String name;
     private int gender;
     private int age;
-    private List<Category> categories;
+    private List<String> categories;
 
     public User() {
+        categories = new ArrayList<>();
     }
 
     public User(String uId, String name, int gender, int age) {
@@ -21,14 +22,15 @@ public class User {
         this.gender = gender;
         this.age = age;
     }
-    public void putCategories(Category category) {
+    public void putCategories(String category) {
         this.categories.add(category);
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "name='" + name + '\'' +
+                "uId='" + uId + '\'' +
+                ", name='" + name + '\'' +
                 ", gender=" + gender +
                 ", age=" + age +
                 ", categories=" + categories +
@@ -70,11 +72,11 @@ public class User {
         this.age = age;
     }
 
-    public List<Category> getCategories() {
+    public List<String> getCategories() {
         return categories;
     }
 
-    public void setCategories(List<Category> categories) {
+    public void setCategories(List<String> categories) {
         this.categories = categories;
     }
 }

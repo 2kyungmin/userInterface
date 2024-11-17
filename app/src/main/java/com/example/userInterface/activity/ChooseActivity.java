@@ -1,5 +1,6 @@
 package com.example.userInterface.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.CheckBox;
@@ -11,8 +12,10 @@ import com.example.userInterface.data.Category;
 import com.example.userInterface.databinding.ActivityChooseBinding;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class ChooseActivity extends AppCompatActivity {
@@ -24,25 +27,38 @@ public class ChooseActivity extends AppCompatActivity {
         binding = ActivityChooseBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        List<Category> categories = new ArrayList<>();
+        List<String> categories = new ArrayList<>();
 
-        for(int i=0; i< Category.values().length; i++){
+        for (int i = 0; i < Category.values().length; i++) {
             CheckBox checkBox = new CheckBox(this);
             checkBox.setText(Category.values()[i].getCategoryName());
             checkBox.setOnCheckedChangeListener((view, isChecked) -> {
-                Log.d("KM", view.getText().toString());
-                if(isChecked)
-                    categories.add(Category.fromString(view.getText().toString()));
-                else categories.remove(Category.fromString(view.getText().toString()));
+                if (isChecked) {
+                    Log.d("KM", view.getText().toString()+" is checked");
+                    categories.add(view.getText().toString());
+                } else {
+                    Log.d("KM", view.getText().toString()+" is not checked");
+                    categories.remove(view.getText().toString());
+                }
             });
             binding.category.addView(checkBox);
         }
 
         binding.buttonStart.setOnClickListener(v -> {
-            Log.d("KM", Application.myUser.toString());
             Application.myUser.setCategories(categories);
+
             Application.db.collection("users")
-                    .document(Application.user.getUid()).set(Application.myUser);
+                    .document(Application.user.getUid())
+                    .update("categories", categories)
+                    .addOnSuccessListener(task -> {
+                        Log.d("KM", "Success to update category"+Application.myUser.toString());
+                    })
+                    .addOnFailureListener(task -> {
+                        Log.d("KM", "Fail to update category"+task.getMessage());
+                    });
+
+            startActivity(new Intent(ChooseActivity.this, ChallengeActivity.class));
+            finish();
         });
     }
 }

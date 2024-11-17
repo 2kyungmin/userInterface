@@ -46,14 +46,18 @@ public class SignupActivity extends AppCompatActivity {
 
 
             if (!name.isEmpty() && gender != 3 && age > 0) {
-            /*
-            버튼 클릭시 정보 확인하는 Dialog 제작한 후 확인 클릭시 아래 코드 입력
-             */
-                Application.myUser = new User(Application.user.getUid(), name, gender, age);
-                CollectionReference users = Application.db.collection("users");
-                users.document(Application.user.getUid()).set(Application.myUser);
-                startActivity(new Intent(SignupActivity.this, ChooseActivity.class));
-                finish();
+                if(Application.user.getUid() == null){
+                    Toast.makeText(getBaseContext(), "회원 정보가 없습니다. 로그인 혹은 회원가입을 해주세요.", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(SignupActivity.this, MainActivity.class));
+                    finish();
+                }
+                else{
+                    Application.myUser = new User(Application.user.getUid(), name, gender, age);
+                    CollectionReference users = Application.db.collection("users");
+                    users.document(Application.user.getUid()).set(Application.myUser);
+                    startActivity(new Intent(SignupActivity.this, ChooseActivity.class));
+                    finish();
+                }
             }
 
         });
