@@ -47,6 +47,7 @@ public class ChooseActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
     }
