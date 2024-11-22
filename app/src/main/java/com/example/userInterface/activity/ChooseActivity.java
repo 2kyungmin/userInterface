@@ -1,64 +1,53 @@
 package com.example.userInterface.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.CheckBox;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.userInterface.Application;
+import com.example.userInterface.R;
 import com.example.userInterface.data.Category;
-import com.example.userInterface.databinding.ActivityChooseBinding;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 public class ChooseActivity extends AppCompatActivity {
-    private ActivityChooseBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityChooseBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        setContentView(R.layout.activity_choose);
 
-        List<String> categories = new ArrayList<>();
+        Spinner spinnerGoals = findViewById(R.id.spinnerGoals);
 
-        for (int i = 0; i < Category.values().length; i++) {
-            CheckBox checkBox = new CheckBox(this);
-            checkBox.setText(Category.values()[i].getCategoryName());
-            checkBox.setOnCheckedChangeListener((view, isChecked) -> {
-                if (isChecked) {
-                    Log.d("KM", view.getText().toString()+" is checked");
-                    categories.add(view.getText().toString());
-                } else {
-                    Log.d("KM", view.getText().toString()+" is not checked");
-                    categories.remove(view.getText().toString());
-                }
-            });
-            binding.category.addView(checkBox);
+        List<String> goalList = new ArrayList<>();
+        for (Category category : Category.values()) {
+            goalList.add(category.getCategoryName());
         }
 
-        binding.buttonStart.setOnClickListener(v -> {
-            Application.myUser.setCategories(categories);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_spinner_item,
+                goalList
+        );
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerGoals.setAdapter(adapter);
 
-            Application.db.collection("users")
-                    .document(Application.user.getUid())
-                    .update("categories", categories)
-                    .addOnSuccessListener(task -> {
-                        Log.d("KM", "Success to update category"+Application.myUser.toString());
-                    })
-                    .addOnFailureListener(task -> {
-                        Log.d("KM", "Fail to update category"+task.getMessage());
-                    });
 
-            startActivity(new Intent(ChooseActivity.this, ChallengeActivity.class));
-            finish();
+        spinnerGoals.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selectedGoal = parent.getItemAtPosition(position).toString();
+                Toast.makeText(ChooseActivity.this, "선택된 목표: " + selectedGoal, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
         });
     }
 }

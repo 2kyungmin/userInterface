@@ -17,7 +17,8 @@ public enum Category {
         제자리걷기
     }
     public enum Health{
-        명상하기
+        명상하기,
+        심호흡하기
     }
     public enum Reading{
 
@@ -45,5 +46,3 @@ public enum Category {
         return null;
     }
 }
-
-
