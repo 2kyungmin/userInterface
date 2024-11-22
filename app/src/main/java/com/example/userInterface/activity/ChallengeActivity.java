@@ -1,14 +1,17 @@
 package com.example.userInterface.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.userInterface.Application;
 import com.example.userInterface.R;
+import com.example.userInterface.databinding.ActivityChallengeBinding;
+
+import java.util.List;
 
 
 public class ChallengeActivity extends AppCompatActivity {
@@ -20,7 +23,12 @@ public class ChallengeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ActivityChallengeBinding binding = ActivityChallengeBinding.inflate(getLayoutInflater());
         setContentView(R.layout.activity_challenge);
+
+        //User로부터 선택된 목표를 가져옴
+        List<String> category = Application.myUser.getCategories();
+
 
 //        // Intent로부터 선택된 목표를 가져옴
 //        Intent intent = getIntent();

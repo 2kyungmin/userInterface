@@ -12,6 +12,9 @@ public class User {
     private int age;
     private List<String> categories;
 
+    public User() {
+    }
+
     public User(String uId, String name, int gender, int age, String category) {
         this.uId = uId;
         this.name = name;

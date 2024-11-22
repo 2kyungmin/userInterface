@@ -9,10 +9,11 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.userInterface.R;
+import com.example.userInterface.databinding.ActivityCommunityBinding;
 
 import java.util.ArrayList;
 
-class CommunityActivity extends AppCompatActivity {
+public class CommunityActivity extends AppCompatActivity {
 
     private ListView communityListView;
     private ArrayList<String> achievementList;
@@ -21,8 +22,8 @@ class CommunityActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_community);
-
+        ActivityCommunityBinding binding = ActivityCommunityBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         communityListView = findViewById(R.id.communityListView);
         achievementList = new ArrayList<>();
