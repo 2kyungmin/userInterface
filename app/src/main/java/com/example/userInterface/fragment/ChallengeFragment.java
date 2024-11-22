@@ -1,44 +1,27 @@
 package com.example.userInterface.fragment;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+import com.example.userInterface.Application;
 import com.example.userInterface.R;
+import com.example.userInterface.databinding.ActivityChallengeBinding;
+
+import java.util.List;
 
 public class ChallengeFragment extends Fragment {
-
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    private String mParam1;
-    private String mParam2;
-
-    public ChallengeFragment() {
-        // Required empty public constructor
-    }
-
-
-    public static ChallengeFragment newInstance(String param1, String param2) {
-        ChallengeFragment fragment = new ChallengeFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
@@ -46,5 +29,14 @@ public class ChallengeFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         return inflater.inflate(R.layout.fragment_challenge, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        ActivityChallengeBinding binding = ActivityChallengeBinding.inflate(getLayoutInflater());
+        List<String> category = Application.myUser.getCategories();
+        Log.d("KM", category.toString());
     }
 }

@@ -1,76 +1,15 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:background="#FFCCCB">
 
-    <TextView
-        android:id="@+id/titleText"
+    <FrameLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginTop="70dp"
-        android:gravity="center"
-        android:text="CHALLENGE"
-        android:textSize="50sp"
-        android:textStyle="bold" />
-
-    <!--    framLayout으로 변경-->
-    <TextView
-        android:id="@+id/subtitleText"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_below="@id/titleText"
-        android:text="5-GO"
-        android:textSize="30sp"
-        android:gravity="center"
-        android:textStyle="bold"/>
-
-    <ImageView
-        android:id="@+id/challengeImage"
-        android:layout_width="match_parent"
-        android:layout_height="268dp"
-        android:layout_below="@id/subtitleText"
-        android:src="@drawable/default_image" />
-
-    <TextView
-        android:id="@+id/messageText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/challengeImage"
-        android:layout_marginTop="20dp"
-        android:fontFamily="sans-serif-thin"
-        android:text="챌린지를 시작하시겠습니까?"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        android:gravity="center" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/messageText"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_margin="10dp">
-
-        <Button
-            android:id="@+id/noButton"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:text="YES"
-            android:textStyle="bold"
-            android:backgroundTint="#D93030"/>
-
-        <Button
-            android:id="@+id/yesButton"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:text="NO"
-            android:textStyle="bold"
-            android:backgroundTint="#A82C2C"
-            android:layout_marginStart="5dp" />
-    </LinearLayout>
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -79,4 +18,4 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="0dp"
         app:menu="@menu/bottom_navigation_menu" />
-</RelativeLayout>
+</LinearLayout>

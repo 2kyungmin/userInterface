@@ -12,22 +12,16 @@ public class EndActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_challenge);
+        setContentView(R.layout.activity_end);
 
         // Yes 버튼 클릭 리스너
-        findViewById(R.id.yesButton).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Yes 버튼 클릭 시 동작
-            }
+        findViewById(R.id.yesButton).setOnClickListener(v -> {
+            // Yes 버튼 클릭 시 동작
         });
 
         // No 버튼 클릭 리스너
-        findViewById(R.id.noButton).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // No 버튼 클릭 시 동작
-            }
+        findViewById(R.id.noButton).setOnClickListener(v -> {
+            // No 버튼 클릭 시 동작
         });
     }
 }
