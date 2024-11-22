@@ -27,7 +27,7 @@
         android:layout_marginBottom="50dp" />
 
     <Button
-        android:id="@+id/googleSign"
+        android:id="@+id/googleSignin"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"

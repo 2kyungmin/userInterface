@@ -29,7 +29,6 @@ public class Application extends MultiDexApplication {
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
         db = FirebaseFirestore.getInstance();
-        myUser = new User();
     }
 
     public static void logout(){

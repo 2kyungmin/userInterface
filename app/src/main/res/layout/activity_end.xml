@@ -41,16 +41,16 @@
         android:src="@drawable/sport" />
 
     <TextView
-    android:id="@+id/messageText"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_below="@+id/challengeImage"
-    android:layout_marginTop="20dp"
-    android:fontFamily="sans-serif-thin"
-    android:text="챌린지 후기와,\n 오늘의 성취도를 기록해보세요"
-    android:textSize="25sp"
-    android:textStyle="bold"
-    android:gravity="center" />
+        android:id="@+id/messageText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/challengeImage"
+        android:layout_marginTop="20dp"
+        android:fontFamily="sans-serif-thin"
+        android:text="챌린지 후기와,\n 오늘의 성취도를 기록해보세요"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:gravity="center" />
 
 
     <LinearLayout

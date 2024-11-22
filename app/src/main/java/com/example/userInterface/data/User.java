@@ -12,15 +12,13 @@ public class User {
     private int age;
     private List<String> categories;
 
-    public User() {
-        categories = new ArrayList<>();
-    }
-
-    public User(String uId, String name, int gender, int age) {
+    public User(String uId, String name, int gender, int age, String category) {
         this.uId = uId;
         this.name = name;
         this.gender = gender;
         this.age = age;
+        categories = new ArrayList<>();
+        this.categories.add(category);
     }
     public void putCategories(String category) {
         this.categories.add(category);
@@ -39,7 +37,7 @@ public class User {
 
     /*
         Getter, Setter
-         */
+    */
     public String getuId() {
         return uId;
     }

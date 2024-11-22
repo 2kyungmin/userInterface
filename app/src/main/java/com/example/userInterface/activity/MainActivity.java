@@ -30,8 +30,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
-    private boolean isSign;
-
+    private boolean isSign = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         // 이미 로그인이 되어 있는 상태라면 자동으로 Activity 전환
         if (Application.checkAuth() && Application.user.getUid() != null) {
             Log.d("KM", "already sign "+Application.user.getUid());
-            binding.googleSign.setVisibility(View.INVISIBLE);
+            binding.googleSignin.setVisibility(View.INVISIBLE);
             binding.googleLogin.setVisibility(View.INVISIBLE);
             DocumentReference document = Application.db.collection("users").document(Application.user.getUid());
             document.get()
@@ -53,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
                         Log.d("KM", "fail to get user: " + task.getMessage());
                     });
             new Handler(Looper.getMainLooper()).postDelayed(() -> {
-                startActivity(new Intent(MainActivity.this, ChooseActivity.class));
+                startActivity(new Intent(MainActivity.this, ChallengeActivity.class));
                 finish();
             }, 1000);
         }
@@ -86,36 +85,32 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-        binding.googleSign.setOnClickListener(v -> {
-            GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                    .requestIdToken(getString(R.string.default_web_client_id))
-                    .requestEmail()
-                    .build();
-            isSign = true;
-            Intent signInIntent = GoogleSignIn.getClient(this, gso).getSignInIntent();
-            launcher.launch(signInIntent);
+        binding.googleSignin.setOnClickListener(v -> {
+            signAndLogin(launcher);
         });
 
         binding.googleLogin.setOnClickListener(v -> {
-            GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                    .requestIdToken(getString(R.string.default_web_client_id))
-                    .requestEmail()
-                    .build();
             isSign = false;
-            Intent signInIntent = GoogleSignIn.getClient(this, gso).getSignInIntent();
-            launcher.launch(signInIntent);
+            signAndLogin(launcher);
         });
+
+    }
+    private void signAndLogin(ActivityResultLauncher<Intent> launcher){
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+        Intent signInIntent = GoogleSignIn.getClient(this, gso).getSignInIntent();
+        launcher.launch(signInIntent);
     }
 
     private void signUpWithGoogleCredential(GoogleSignInAccount account) {
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
         Application.auth.signInWithCredential(credential)
                 .addOnCompleteListener(this, task -> {
-                    if (isSign && task.isSuccessful()) {
+                    if (task.isSuccessful()) {
+                        Application.user = Application.auth.getCurrentUser();
                         startActivity(new Intent(MainActivity.this, SignupActivity.class));
-                        finish();
-                    } else if (!isSign && task.isSuccessful()) {
-                        startActivity(new Intent(MainActivity.this, ChallengeActivity.class));
                         finish();
                     } else if (isSign && !task.isSuccessful()) {
                         Toast.makeText(MainActivity.this, "회원가입에 실패하였습니다.", Toast.LENGTH_SHORT).show();

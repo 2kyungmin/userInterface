@@ -6,38 +6,24 @@
     android:padding="20dp"
     android:background="#FFCCCB">
 
+
     <TextView
+        android:id="@+id/communityTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="챌린지 후기 작성"
-        android:textSize="24sp"
+        android:text="챌린지 COMMUNITY"
+        android:textSize="40sp"
         android:textStyle="bold"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="30dp"
         android:layout_gravity="center"/>
 
-    <EditText
-        android:id="@+id/reviewInput"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="후기를 입력하세요"
-        android:padding="10dp"
-        android:background="@android:drawable/edit_text"
-        android:layout_marginBottom="10dp"/>
 
-    <Button
-        android:id="@+id/submitButton"
+    <ListView
+        android:id="@+id/communityListView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="후기 제출"
-        android:backgroundTint="#D93030"
-        android:textStyle="bold"/>
+        android:layout_height="match_parent"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="1dp"
+        android:layout_marginTop="20dp"/>
 
-    <TextView
-        android:id="@+id/reviewList"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="작성된 후기가 없습니다."
-        android:textSize="16sp"
-        android:padding="10dp" />
 </LinearLayout>
