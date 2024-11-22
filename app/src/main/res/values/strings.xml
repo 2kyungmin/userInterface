@@ -1,8 +1,10 @@
 <resources>
+    <string name="app_name">My Application</string>
     <string-array name="goals_array">
+        <item>선택하세요</item>
         <item>운동 5-GO</item>
-        <item>독서 5-GO</item>
         <item>건강 5-GO</item>
+        <item>독서 5-GO</item>
         <item>영단어 5-GO</item>
     </string-array>
 </resources>

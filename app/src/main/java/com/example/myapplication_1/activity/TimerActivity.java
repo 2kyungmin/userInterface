@@ -1,95 +1,106 @@
 package com.example.myapplication_1.activity;
 
+import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.util.Log;
-import android.view.View;
-import androidx.appcompat.app.AlertDialog;
+import android.widget.Button;
+import android.widget.TextView;
+
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.myapplication_1.R;
-import com.example.myapplication_1.databinding.ActivityTimerBinding;
 
 public class TimerActivity extends AppCompatActivity {
 
-    private ActivityTimerBinding binding;
-    private CountDownTimer timer;
-    private long remainingTime = 300000;
+    private TextView timerText;
+    private Button startButton, resetButton;
+    private CountDownTimer countDownTimer;
+    private long timeLeftInMillis = 300000;
     private boolean isTimerRunning = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityTimerBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        setContentView(R.layout.activity_timer);
 
-        binding.startButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        timerText = findViewById(R.id.timerText);
+        startButton = findViewById(R.id.startButton);
+        resetButton = findViewById(R.id.resetButton);
+
+        startButton.setOnClickListener(v -> {
+            if (isTimerRunning) {
+                pauseTimer();
+            } else {
                 startTimer();
             }
         });
 
-        binding.resetButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                pauseTimer();
-            }
+        resetButton.setOnClickListener(v -> {
+            pauseTimer();
+            resetTimer();
         });
+
+
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                showExitConfirmationDialog();
+            }
+        };
+        getOnBackPressedDispatcher().addCallback(this, callback);
     }
 
     private void startTimer() {
-        isTimerRunning = true;
-        timer = new CountDownTimer(remainingTime, 1000) {
+        countDownTimer = new CountDownTimer(timeLeftInMillis, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                remainingTime = millisUntilFinished;
-                long secondsRemaining = millisUntilFinished / 1000;
-                binding.timerText.setText(String.format("%02d:%02d", secondsRemaining / 60, secondsRemaining % 60));
+                timeLeftInMillis = millisUntilFinished;
+                updateTimerText();
             }
 
             @Override
             public void onFinish() {
-                binding.timerText.setText("00:00");
                 isTimerRunning = false;
+                startButton.setText("시작");
             }
         }.start();
+
+        isTimerRunning = true;
+        startButton.setText("일시정지");
     }
 
     private void pauseTimer() {
-        if (isTimerRunning) {
-            timer.cancel();
-            isTimerRunning = false;
+        if (countDownTimer != null) {
+            countDownTimer.cancel();
         }
+        isTimerRunning = false;
+        startButton.setText("재시작");
     }
 
-    @Override
-    public void onBackPressed() {
-        Log.d("TimerActivity", "onBackPressed 호출됨");
-        if (isTimerRunning) {
-            showExitConfirmationDialog();
-        } else {
-            super.onBackPressed();
-        }
+    private void resetTimer() {
+        timeLeftInMillis = 300000;
+        updateTimerText();
+    }
+
+    private void updateTimerText() {
+        int minutes = (int) (timeLeftInMillis / 1000) / 60;
+        int seconds = (int) (timeLeftInMillis / 1000) % 60;
+        String timeFormatted = String.format("%02d:%02d", minutes, seconds);
+        timerText.setText(timeFormatted);
     }
 
     private void showExitConfirmationDialog() {
         new AlertDialog.Builder(this)
                 .setTitle("경고")
                 .setMessage("챌린지를 종료하시겠습니까?")
-                .setPositiveButton("YES", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        pauseTimer();
-                        TimerActivity.super.onBackPressed();
-                    }
+                .setPositiveButton("YES", (dialog, which) -> {
+                    pauseTimer();
+                    finish();
                 })
-                .setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                })
+                .setNegativeButton("NO", (dialog, which) -> dialog.dismiss())
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
     }
 }
-

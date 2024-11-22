@@ -1,14 +1,16 @@
 package com.example.myapplication_1.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.myapplication_1.R;
 
 public class ChooseActivity extends AppCompatActivity {
@@ -27,29 +29,40 @@ public class ChooseActivity extends AppCompatActivity {
         buttonStart = findViewById(R.id.buttonStart);
 
 
+        Intent intent = getIntent();
+        String userName = intent.getStringExtra("userName");
+        if (userName != null) {
+            editTextName.setText(userName);
+        }
+
+
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.goals_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerGoals.setAdapter(adapter);
 
-        // Spinner 선택 리스너 설정
-        spinnerGoals.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selectedGoal = parent.getItemAtPosition(position).toString();
-                Toast.makeText(ChooseActivity.this, "선택한 목표: " + selectedGoal, Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
 
         buttonStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                startChallenge();
             }
         });
     }
-}
 
+    private void startChallenge() {
+        String selectedGoal = spinnerGoals.getSelectedItem().toString();
+
+
+        if (selectedGoal.equals("")) {
+            Toast.makeText(this, "목표를 선택하세요", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+
+        Intent intent = new Intent(ChooseActivity.this, ChallengeActivity.class);
+        intent.putExtra("goal", selectedGoal);
+        startActivity(intent);
+        finish();
+    }
+}
