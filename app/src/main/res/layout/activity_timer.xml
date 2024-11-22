@@ -13,35 +13,32 @@
         android:text="05:00"
         android:textSize="130sp"
         android:textStyle="bold"
-        android:layout_marginTop="150dp"/>
+        android:layout_marginTop="50dp"/>
 
+    <ImageView
+        android:id="@+id/clock"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:src="@drawable/clock"
+        />
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/startButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:text="시작"
         android:layout_below="@id/clock"
-        android:layout_marginTop="30dp"
-        android:gravity="center">
+        android:layout_marginTop="32dp"
+        android:layout_centerHorizontal="true"/>
 
-        <Button
-            android:id="@+id/startButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="시작"
-            android:layout_weight="1"
-            android:textStyle="bold"
-            android:backgroundTint="#D93030"/>
+    <Button
+        android:id="@+id/resetButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="일시정지"
+        android:layout_below="@id/startButton"
+        android:layout_marginTop="16dp"
+        android:layout_centerHorizontal="true"/>
 
-        <Button
-            android:id="@+id/resetButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="일시정지"
-            android:layout_weight="1"
-            android:textStyle="bold"
-            android:backgroundTint="#A82C2C"
-            android:layout_marginStart="5dp"/>
-    </LinearLayout>
-</LinearLayout>
+
+</RelativeLayout>
