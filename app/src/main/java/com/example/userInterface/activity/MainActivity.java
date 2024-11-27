@@ -10,23 +10,20 @@ import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.userInterface.Application;
 import com.example.userInterface.R;
-import com.example.userInterface.data.User;
+import com.example.userInterface.dto.User;
 import com.example.userInterface.databinding.ActivityMainBinding;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
@@ -37,24 +34,31 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        // 이미 로그인이 되어 있는 상태라면 자동으로 Activity 전환
-        if (Application.checkAuth() && Application.user.getUid() != null) {
-            Log.d("KM", "already sign "+Application.user.getUid());
-            binding.googleSignin.setVisibility(View.INVISIBLE);
-            binding.googleLogin.setVisibility(View.INVISIBLE);
+        Handler handler = new Handler(Looper.getMainLooper());
+        Thread getInfo = new Thread(() -> {
             DocumentReference document = Application.db.collection("users").document(Application.user.getUid());
             document.get()
                     .addOnSuccessListener(task -> {
                         Application.myUser = task.toObject(User.class);
                         Log.d("KM", "success to get user" + Application.myUser.toString());
+                        handler.post(() -> {
+                            Intent intent = new Intent(MainActivity.this, ChallengeActivity.class);
+                            startActivity(intent);
+                            finish();
+                        });
                     })
                     .addOnFailureListener(task -> {
                         Log.d("KM", "fail to get user: " + task.getMessage());
                     });
-            new Handler(Looper.getMainLooper()).postDelayed(() -> {
-                startActivity(new Intent(MainActivity.this, ChallengeActivity.class));
-                finish();
-            }, 1000);
+        });
+
+        // 이미 로그인이 되어 있는 상태라면 자동으로 Activity 전환
+        if (Application.checkAuth() && Application.user.getUid() != null) {
+            Log.d("KM", "already sign "+Application.user.getUid());
+            binding.googleSignin.setVisibility(View.INVISIBLE);
+            binding.googleLogin.setVisibility(View.INVISIBLE);
+
+            getInfo.start();
         }
 
         binding.googleLogout.setOnClickListener(v -> {

@@ -4,8 +4,7 @@
         <item>운동 5-GO</item>
         <item>건강 5-GO</item>
         <item>독서 5-GO</item>
-        <item>영단어 5-GO</item>
+        <item>영어 5-GO</item>
     </string-array>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

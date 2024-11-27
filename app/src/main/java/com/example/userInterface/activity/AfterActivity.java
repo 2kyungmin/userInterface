@@ -19,7 +19,7 @@ public class AfterActivity extends AppCompatActivity {
     private EditText inputText;
     private Button registerButton;
     private RadioButton happyEmoji, sadEmoji, angryEmoji;
-    private SharedPreferences sharedPreferences;
+    public SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +32,7 @@ public class AfterActivity extends AppCompatActivity {
         sadEmoji = findViewById(R.id.sadEmoji);
         angryEmoji = findViewById(R.id.angryEmoji);
 
-        sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences("myChallenges", MODE_PRIVATE);
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.userInterface.Application;
 import com.example.userInterface.R;
-import com.example.userInterface.data.User;
+import com.example.userInterface.dto.User;
 import com.example.userInterface.databinding.ActivitySignupBinding;
 import com.google.firebase.firestore.CollectionReference;
 

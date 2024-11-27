@@ -1,9 +1,7 @@
-package com.example.userInterface.data;
+package com.example.userInterface.dto;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class User {
     private String uId;
