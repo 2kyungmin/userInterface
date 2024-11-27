@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">5-GO</string>
     <string-array name="goals_array">
-        <item name="exercise">운동 5-GO</item>
+        <item>운동 5-GO</item>
         <item>건강 5-GO</item>
         <item>독서 5-GO</item>
         <item>영단어 5-GO</item>

@@ -4,8 +4,28 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewPager"
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="OO님의 챌린지"
+        android:textSize="24sp" />
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="537dp"
+        android:layout_weight="1">
+
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/registerButton"
+        android:layout_width="172dp"
+        android:layout_height="wrap_content"
+        android:text="등록" />
+
+
 </LinearLayout>
+

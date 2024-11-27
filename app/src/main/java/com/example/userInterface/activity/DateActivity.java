@@ -16,17 +16,17 @@ public class DateActivity extends AppCompatActivity {
         ActivityDateBinding binding = ActivityDateBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+//        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
 
         binding.calendarView.setOnDateChangeListener((view, year, month, dayOfMonth) -> {
             String selectedDate = year + "-" + (month + 1) + "-" + dayOfMonth;
-            String review = sharedPreferences.getString(selectedDate, null);
-
-            if (review != null) {
-                binding.reviewTextView.setText(review);
-            } else {
-                binding.reviewTextView.setText("해당 날짜에 성취 기록이 없습니다");
-            }
+//            String review = sharedPreferences.getString(selectedDate, null);
+//
+//            if (review != null) {
+//                binding.reviewTextView.setText(review);
+//            } else {
+//                binding.reviewTextView.setText("해당 날짜에 성취 기록이 없습니다");
+//            }
         });
     }
 }

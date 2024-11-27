@@ -16,8 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private ActivityMainBinding binding;
-    private FrameLayout fragmentContainer;
     private List<Fragment> fragments;
     private int currentIndex = 0;
 
@@ -25,10 +23,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        com.kyung.testapp.databinding.ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        fragmentContainer = binding.fragmentContainer;
+        FrameLayout fragmentContainer = binding.fragmentContainer;
 
         fragments = new ArrayList<>();
         fragments.add(new Test3Fragment());
