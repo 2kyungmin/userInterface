@@ -1,7 +1,5 @@
 package com.example.userInterface.activity;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,8 +14,6 @@ import com.example.userInterface.fragment.CommunityFragment;
 import com.example.userInterface.fragment.DateFragment;
 
 public class ChallengeActivity extends AppCompatActivity {
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,4 +55,5 @@ public class ChallengeActivity extends AppCompatActivity {
                 .replace(R.id.container, fragment)
                 .commit();
     }
+
 }

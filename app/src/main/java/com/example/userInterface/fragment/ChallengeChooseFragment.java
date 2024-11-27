@@ -1,6 +1,7 @@
 package com.example.userInterface.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -8,32 +9,31 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.userInterface.Application;
 import com.example.userInterface.R;
+import com.example.userInterface.activity.EndActivity;
+import com.example.userInterface.activity.TimerActivity;
 
-import java.util.List;
-
-public class TestFragment extends Fragment {
+public class ChallengeChooseFragment extends Fragment {
 
     private static final String ARG_PARAM1 = "challengeName";
     private String mParam1;
     private static int count;
 
-    public TestFragment() {
+    public ChallengeChooseFragment() {
 
     }
 
-    public static TestFragment newInstance(String param1) {
-        TestFragment fragment = new TestFragment();
+    public static ChallengeChooseFragment newInstance(String param1) {
+        ChallengeChooseFragment fragment = new ChallengeChooseFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         fragment.setArguments(args);
@@ -52,13 +52,15 @@ public class TestFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_test, container, false);
+        View view = inflater.inflate(R.layout.fragment_challenge_choose, container, false);
+
+        return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        TextView text = view.findViewById(R.id.name);
+        TextView text = view.findViewById(R.id.challengeChoose);
 
         String challengeName = getArguments().getString(ARG_PARAM1);
         Log.d("KM", "Test: " + challengeName);
@@ -92,6 +94,12 @@ public class TestFragment extends Fragment {
                                 || Math.abs(event.getRawX() - initialX) > 100) { // 특정 거리 이상 드래그한 경우
                             // 현재 상단의 프래그먼트를 제거
                             removeTopFragment();
+                            v.animate()
+                                    .x(vx)
+                                    .y(vy)
+                                    .setDuration(300)
+                                    .start();
+                            return true;
                         }
                         // 프래그먼트를 원래 위치로 되돌림
                         v.animate()
@@ -103,8 +111,14 @@ public class TestFragment extends Fragment {
                     default:
                         return false;
                 }
-                return true;
+                return false;
             }
+        });
+
+        view.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), TimerActivity.class);
+            intent.putExtra("challengeName", getArguments().getString(ARG_PARAM1));
+            startActivity(intent);
         });
     }
 
