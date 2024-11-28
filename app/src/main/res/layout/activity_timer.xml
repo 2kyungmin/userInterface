@@ -3,8 +3,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="20dp"
-    android:gravity="center_horizontal"
-    android:background="#FFCCCB">
+    android:gravity="center_horizontal">
 
     <TextView
         android:id="@+id/timerText"
@@ -13,17 +12,16 @@
         android:text="05:00"
         android:textSize="130sp"
         android:textStyle="bold"
-        android:layout_marginTop="50dp"/>
+        android:layout_marginTop="150dp"/>
 
 
     <Button
         android:id="@+id/startButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="시작"
         android:layout_below="@id/timerText"
-        android:layout_marginTop="32dp"
-        android:layout_centerHorizontal="true"/>
+        android:layout_marginTop="30dp"
+        android:text="시작" />
 
     <Button
         android:id="@+id/resetButton"
@@ -31,7 +29,6 @@
         android:layout_height="wrap_content"
         android:text="일시정지"
         android:layout_below="@id/startButton"
-        android:layout_marginTop="16dp"
         android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>
