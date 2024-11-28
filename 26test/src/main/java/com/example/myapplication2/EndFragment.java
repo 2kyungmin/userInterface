@@ -25,8 +25,6 @@ public class EndFragment extends Fragment {
         TextView challengeText = view.findViewById(R.id.challengeText);
         challengeText.setText(selectedChallenge);
 
-
-
         return view;
     }
 }

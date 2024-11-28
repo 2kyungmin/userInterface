@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.multidex.MultiDexApplication;
 
 import com.example.userInterface.dto.User;
+import com.example.userInterface.fragment.ChallengeChooseFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -23,7 +24,7 @@ public class Application extends MultiDexApplication {
     public static User myUser;
     public static SharedPreferences myChallenges;
     public static SharedPreferences.Editor editor;
-    public static List<Fragment> fragments;
+    public static List<ChallengeChooseFragment> fragments;
 
     public static boolean checkAuth() {
         if (user != null) {

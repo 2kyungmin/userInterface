@@ -1,8 +1,10 @@
 package com.example.userInterface.activity;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -17,7 +19,8 @@ public class TimerActivity extends AppCompatActivity {
     private TextView timerText;
     private Button startButton, resetButton;
     private CountDownTimer countDownTimer;
-    private long timeLeftInMillis = 300000;
+    private long timeLeftInMillis = 10000;
+//    private long timeLeftInMillis = 300000;
     private boolean isTimerRunning = false;
 
     @Override
@@ -61,9 +64,13 @@ public class TimerActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFinish() {
-                isTimerRunning = false;
-                startButton.setText("시작");
+            public void onFinish() {        // 5분 끝났을 때
+                Intent resultIntent = new Intent();
+                String challengeName = getIntent().getStringExtra("challengeName");
+                Log.d("KM", "5 Finish: "+challengeName);
+                resultIntent.putExtra("challengeName", challengeName);
+                setResult(TimerActivity.RESULT_OK, resultIntent);
+                finish();
             }
         }.start();
 

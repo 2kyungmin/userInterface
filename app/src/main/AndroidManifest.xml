@@ -28,10 +28,6 @@
         <activity
             android:name=".activity.TimerActivity"
             android:exported="false" />
-        <activity
-            android:name=".activity.ChallengeActivity"
-            android:exported="false"/>
-
         <activity android:name=".activity.SignupActivity" />
         <activity
             android:name=".activity.MainActivity"

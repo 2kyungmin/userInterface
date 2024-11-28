@@ -1,9 +1,11 @@
 package com.example.userInterface.fragment;
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -14,18 +16,17 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.userInterface.Application;
 import com.example.userInterface.R;
-import com.example.userInterface.activity.EndActivity;
+import com.example.userInterface.activity.ChallengeActivity;
 import com.example.userInterface.activity.TimerActivity;
 
 public class ChallengeChooseFragment extends Fragment {
 
     private static final String ARG_PARAM1 = "challengeName";
-    private String mParam1;
+    private String challengeName;
     private static int count;
 
     public ChallengeChooseFragment() {
@@ -40,12 +41,11 @@ public class ChallengeChooseFragment extends Fragment {
         return fragment;
     }
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
+            challengeName = getArguments().getString(ARG_PARAM1);
         }
     }
 
@@ -62,7 +62,6 @@ public class ChallengeChooseFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         TextView text = view.findViewById(R.id.challengeChoose);
 
-        String challengeName = getArguments().getString(ARG_PARAM1);
         Log.d("KM", "Test: " + challengeName);
         text.setText(challengeName);
 
@@ -116,9 +115,9 @@ public class ChallengeChooseFragment extends Fragment {
         });
 
         view.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), TimerActivity.class);
-            intent.putExtra("challengeName", getArguments().getString(ARG_PARAM1));
-            startActivity(intent);
+            if (getActivity() instanceof ChallengeActivity) {
+                ((ChallengeActivity) getActivity()).openTimer(challengeName);
+            }
         });
     }
 
@@ -126,14 +125,17 @@ public class ChallengeChooseFragment extends Fragment {
         FragmentManager fragmentManager = getParentFragmentManager();
 
         fragmentManager.beginTransaction().hide(this).commit();
-        Log.d("KM", this.getTag());
+        Log.d("KM", "Choose: "+this.getTag());
         count++;
 
         if (count % Application.fragments.size() == 0) {
-            Log.d("KM", "here");
             for (Fragment f : Application.fragments) {
                 fragmentManager.beginTransaction().show(f).commit();
             }
         }
+    }
+
+    public String getChallengeName() {
+        return challengeName;
     }
 }

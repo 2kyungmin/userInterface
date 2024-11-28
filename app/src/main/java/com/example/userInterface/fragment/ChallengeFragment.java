@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -44,7 +45,11 @@ public class ChallengeFragment extends Fragment {
         Log.d("KM", Application.myUser.getName() + "의 챌린지: " + Application.myUser.getCategories());
 
         // Fragment 추가
-        if(Application.fragments.isEmpty()){
+        FragmentManager fragmentManager = getChildFragmentManager();
+        FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
+
+        if (Application.fragments.isEmpty()) {
+            // category에 해당하는 challenge들 획득
             List<String> categories = Application.myUser.getCategories();
             List<String> challenges = new ArrayList<>();
             for (String s : categories) {
@@ -52,13 +57,20 @@ public class ChallengeFragment extends Fragment {
             }
             Log.d("KM", challenges.toString());
 
-            FragmentManager fragmentManager = getChildFragmentManager();
-            FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
-
+            // challenge 이름에 해당하는 Fragment제작
             for (String s : challenges) {
-                ChallengeChooseFragment test = ChallengeChooseFragment.newInstance(s);
-                Application.fragments.add(test);
-                fragmentTransaction.add(binding.fragmentContainer.getId(), test, s);
+                ChallengeChooseFragment challengeChooseFragment = ChallengeChooseFragment.newInstance(s);
+
+                Application.fragments.add(challengeChooseFragment);
+                fragmentTransaction.add(binding.fragmentContainer.getId(), challengeChooseFragment, s);
+            }
+            fragmentTransaction.commit();
+        }
+        else{
+            Log.d("KM", "here");
+            for(ChallengeChooseFragment fragment: Application.fragments){
+                Log.d("KM", "Fragment: "+fragment.getChallengeName());
+                fragmentTransaction.add(binding.fragmentContainer.getId(), fragment, fragment.getChallengeName());
             }
             fragmentTransaction.commit();
         }
