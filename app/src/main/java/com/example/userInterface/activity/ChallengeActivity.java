@@ -112,5 +112,4 @@ public class ChallengeActivity extends AppCompatActivity {
                     .commit();
         }
     }
-
 }

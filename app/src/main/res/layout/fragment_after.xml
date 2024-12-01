@@ -1,13 +1,64 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center">
+    android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/challengeText"
-        android:layout_width="wrap_content"
+        android:id="@+id/titleText"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="70dp"
+        android:gravity="center"
+        android:text="종료된 CHALLENGE"
+        android:textSize="45sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/subtitleText"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/titleText"
+        android:text="플랭크 5-GO"
+        android:textSize="30sp"
+        android:gravity="center"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/messageText"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="36sp"/>
-</LinearLayout>
+        android:layout_below="@+id/subtitleText"
+        android:layout_marginTop="200dp"
+        android:fontFamily="sans-serif-thin"
+        android:text="챌린지 후기와,\n 오늘의 성취도를 기록해보세요"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:gravity="center" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/messageText"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_margin="10dp">
+
+        <Button
+            android:id="@+id/yesButton"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:text="YES"
+            android:textStyle="bold"
+            android:backgroundTint="#D93030"/>
+
+        <Button
+            android:id="@+id/noButton"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:text="NO"
+            android:textStyle="bold"
+            android:backgroundTint="#A82C2C"
+            android:layout_marginStart="5dp" />
+    </LinearLayout>
+</RelativeLayout>

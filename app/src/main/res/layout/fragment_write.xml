@@ -9,9 +9,10 @@
         android:id="@+id/titleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="24sp"
+        android:textSize="30sp"
         android:textStyle="bold"
         android:layout_marginBottom="16dp"/>
+
 
     <TextView
         android:id="@+id/challengeText"
@@ -20,11 +21,13 @@
         android:textSize="20sp"
         android:layout_marginBottom="16dp"/>
 
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="이모티콘을 선택하세요:"
-        android:layout_marginBottom="8dp"/>
+        android:layout_marginBottom="20dp"/>
+
 
     <RadioGroup
         android:id="@+id/emojiGroup"
@@ -51,17 +54,20 @@
             android:text="😊"/>
     </RadioGroup>
 
+
     <EditText
         android:id="@+id/reviewInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="후기를 입력하세요"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="10dp"/>
 
     <Button
         android:id="@+id/submitButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="후기 등록하기"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="260dp"
+        android:backgroundTint="#D93030"/>
 </LinearLayout>
+
