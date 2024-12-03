@@ -23,7 +23,7 @@
         android:orientation="horizontal"
         android:gravity="center_vertical">
 
-        <ImageView
+        <TextView
             android:id="@+id/emoji_circle"
             android:layout_width="48dp"
             android:layout_height="48dp"
@@ -31,11 +31,10 @@
             android:scaleType="centerInside" />
 
         <TextView
-            android:id="@+id/input_text"
+            android:id="@+id/review_text"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:hint="후기"
             android:padding="10dp"
             android:background="@android:drawable/editbox_background" />
     </LinearLayout>

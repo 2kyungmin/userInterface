@@ -40,7 +40,6 @@ public class ChallengeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
         // Fragment 추가
         FragmentManager fragmentManager = getChildFragmentManager();
         FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
@@ -56,8 +55,8 @@ public class ChallengeFragment extends Fragment {
 
             // challenge 이름에 해당하는 Fragment제작
             for (String s : challenges) {
-                ChallengeChooseFragment challengeChooseFragment = ChallengeChooseFragment.newInstance(s);
-
+                ChallengeChooseFragment challengeChooseFragment
+                        = ChallengeChooseFragment.newInstance(s);
                 Application.fragments.add(challengeChooseFragment);
                 fragmentTransaction.add(binding.container.getId(), challengeChooseFragment, s);
             }

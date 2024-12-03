@@ -92,7 +92,7 @@ public class ChallengeActivity extends AppCompatActivity {
         Intent intent = new Intent();
         intent.putExtra("challengeName", challengeName);
         Log.d("KM", "openWrite: " + challengeName);
-        transferTo(new WriteFragment(), "write");
+        transferTo(WriteFragment.newInstance(challengeName), "write");
     }
 
     private void transferTo(Fragment fragment, String tag) {

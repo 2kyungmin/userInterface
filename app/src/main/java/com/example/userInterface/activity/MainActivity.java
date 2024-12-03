@@ -36,7 +36,8 @@ public class MainActivity extends AppCompatActivity {
 
         Handler handler = new Handler(Looper.getMainLooper());
         Thread getInfo = new Thread(() -> {
-            DocumentReference document = Application.db.collection("users").document(Application.user.getUid());
+            DocumentReference document = Application.db.collection("users")
+                    .document(Application.user.getUid());
             document.get()
                     .addOnSuccessListener(task -> {
                         Application.myUser = task.toObject(User.class);

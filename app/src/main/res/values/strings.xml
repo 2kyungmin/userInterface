@@ -6,5 +6,10 @@
         <item>독서 5-GO</item>
         <item>영어 5-GO</item>
     </string-array>
+    <string-array name="emoji">
+        <item name="angry">😡</item>
+        <item name="sad">😢</item>
+        <item name="happy">😊</item>
+    </string-array>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
