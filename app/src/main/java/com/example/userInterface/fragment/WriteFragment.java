@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 import com.example.userInterface.Application;
 import com.example.userInterface.R;
-import com.example.userInterface.activity.ChallengeActivity;
+import com.example.userInterface.activity.MainActivity;
 import com.example.userInterface.databinding.FragmentWriteBinding;
 import com.example.userInterface.dto.Emoji;
 import com.example.userInterface.dto.Review;
@@ -78,7 +78,6 @@ public class WriteFragment extends Fragment {
             }
         });
 
-        // 등록 버튼 리스너
         binding.submitButton.setOnClickListener(v -> {
             if (emoji == null) {
                 Toast.makeText(getActivity().getBaseContext(),
@@ -97,8 +96,9 @@ public class WriteFragment extends Fragment {
             Application.db.collection("review")
                     .document(review.getuId()+review.getDate()).set(review);
 
-            Intent intent = new Intent(getActivity().getApplicationContext(), ChallengeActivity.class);
-            intent.addFlags(FLAG_ACTIVITY_CLEAR_TASK|FLAG_ACTIVITY_NEW_TASK);
+            // 후기를 등록한 후 MainActivity로 이동
+            Intent intent = new Intent(getActivity().getApplicationContext(), MainActivity.class);
+            intent.addFlags(FLAG_ACTIVITY_CLEAR_TASK | FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         });
     }
@@ -106,5 +106,4 @@ public class WriteFragment extends Fragment {
     private void changeEmoji(Emoji emoji) {
         this.emoji = emoji;
     }
-
 }

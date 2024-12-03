@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.userInterface.R;
+import com.example.userInterface.activity.MainActivity;
 import com.example.userInterface.activity.ChallengeActivity;
 
 public class AfterFragment extends Fragment {
@@ -44,14 +45,23 @@ public class AfterFragment extends Fragment {
         builder.setTitle("챌린지의 후기와, 오늘의 성취도를 기록해보세요!")
                 .setPositiveButton("YES", (dialog, which) -> {
                     Log.d("KM", "yes: "+challengeName);
-                    if(getActivity() instanceof ChallengeActivity){
-                        ((ChallengeActivity) getActivity()).openWrite(challengeName);
-                    }
+                    WriteFragment writeFragment = WriteFragment.newInstance(challengeName);
+                    getParentFragmentManager().beginTransaction()
+                            .replace(R.id.container, writeFragment)
+                            .addToBackStack(null)
+                            .commit();
                 })
                 .setNegativeButton("NO", (dialog, which) -> {
-                    // No click시 원래 Main화면으로 이동 되게 설정
+                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    getActivity().finish();
                 });
 
-        builder.show();
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);  // YES 왼쪽
+        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextAlignment(View.TEXT_ALIGNMENT_VIEW_END);    // NO 오른쪽
     }
 }

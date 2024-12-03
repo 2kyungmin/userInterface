@@ -1,64 +1,23 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".fragment.AfterFragment">
 
     <TextView
         android:id="@+id/titleText"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginTop="70dp"
-        android:gravity="center"
-        android:text="종료된 CHALLENGE"
-        android:textSize="45sp"
-        android:textStyle="bold"/>
-
-    <TextView
-        android:id="@+id/subtitleText"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_below="@+id/titleText"
-
-        android:textSize="30sp"
-        android:gravity="center"
-        android:textStyle="bold"/>
-
-    <TextView
-        android:id="@+id/messageText"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/subtitleText"
-        android:layout_marginTop="200dp"
-        android:fontFamily="sans-serif-thin"
-        android:text="챌린지 후기와,\n 오늘의 성취도를 기록해보세요"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        android:gravity="center" />
+        android:text="..."
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/messageText"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_margin="10dp">
+</androidx.constraintlayout.widget.ConstraintLayout>
 
-        <Button
-            android:id="@+id/yesButton"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:text="YES"
-            android:textStyle="bold"
-            android:backgroundTint="#D93030"/>
 
-        <Button
-            android:id="@+id/noButton"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:text="NO"
-            android:textStyle="bold"
-            android:backgroundTint="#A82C2C"
-            android:layout_marginStart="5dp" />
-    </LinearLayout>
-</RelativeLayout>
+
