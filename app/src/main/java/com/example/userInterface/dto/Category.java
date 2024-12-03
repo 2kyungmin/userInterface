@@ -46,7 +46,9 @@ enum Exercise{
     PLANK("플랭크 5-GO"),
     SIT_UP("윗몸일으키기 5-GO"),
     SQUAT("스쿼트 5-GO"),
-    WORK("제자리 걷기 5-GO");
+    WORK("제자리 걷기 5-GO"),
+    LUNGES ("런지 5-GO"),
+    SIDE_PLANK ("사이드 플랭크 5-GO");
 
     private String challenge;
 
@@ -69,7 +71,8 @@ enum Exercise{
 
 enum Reading{
     SPEAK("소리내서 읽기 5-GO"),
-    WRITE("필사 5-GO");
+    WRITE("필사 5-GO"),
+    POETRY("시집 읽기 5-GO");
 
     private String challenge;
 
@@ -92,7 +95,8 @@ enum Reading{
 
 enum Health {
     MEDITATION("명상 5-GO"),
-    STRETCH("스트레칭 5-GO");
+    STRETCH("스트레칭 5-GO"),
+    BREATHING("호흡 5-GO");
 
     private String challenge;
 
@@ -115,7 +119,8 @@ enum Health {
 
 enum English{
     SONG("팝송 듣기 5-GO"),
-    WORDS("영단어 공부 5-GO");
+    WORDS("영단어 공부 5-GO"),
+    NEWS("영자신문 읽기 5-GO");
 
     private String challenge;
 
