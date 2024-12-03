@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_below="@+id/titleText"
-        android:text="플랭크 5-GO"
+
         android:textSize="30sp"
         android:gravity="center"
         android:textStyle="bold"/>

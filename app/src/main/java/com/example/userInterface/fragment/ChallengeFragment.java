@@ -40,9 +40,6 @@ public class ChallengeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // TextView 설정
-        binding.title.setText(Application.myUser.getName() + "의 챌린지");
-        Log.d("KM", Application.myUser.getName() + "의 챌린지: " + Application.myUser.getCategories());
 
         // Fragment 추가
         FragmentManager fragmentManager = getChildFragmentManager();
@@ -62,7 +59,7 @@ public class ChallengeFragment extends Fragment {
                 ChallengeChooseFragment challengeChooseFragment = ChallengeChooseFragment.newInstance(s);
 
                 Application.fragments.add(challengeChooseFragment);
-                fragmentTransaction.add(binding.fragmentContainer.getId(), challengeChooseFragment, s);
+                fragmentTransaction.add(binding.container.getId(), challengeChooseFragment, s);
             }
             fragmentTransaction.commit();
         }
@@ -70,7 +67,7 @@ public class ChallengeFragment extends Fragment {
             Log.d("KM", "here");
             for(ChallengeChooseFragment fragment: Application.fragments){
                 Log.d("KM", "Fragment: "+fragment.getChallengeName());
-                fragmentTransaction.add(binding.fragmentContainer.getId(), fragment, fragment.getChallengeName());
+                fragmentTransaction.add(binding.container.getId(), fragment, fragment.getChallengeName());
             }
             fragmentTransaction.commit();
         }

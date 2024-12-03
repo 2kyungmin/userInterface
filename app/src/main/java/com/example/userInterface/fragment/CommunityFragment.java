@@ -75,7 +75,7 @@ public class CommunityFragment extends Fragment {
         @Override
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
             String text = list.get(position);
-            holder.binding.itemText.setText(text);
+            holder.binding.nickname.setText(text);
         }
 
         @Override

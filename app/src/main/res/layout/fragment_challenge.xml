@@ -24,7 +24,13 @@
         android:textStyle="bold" />
 
 
-
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:id="@+id/container"
+        android:layout_below="@id/subtitleText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="4dp" />
 
     <TextView
         android:id="@+id/messageText"

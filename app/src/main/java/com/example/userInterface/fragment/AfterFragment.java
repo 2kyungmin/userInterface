@@ -33,7 +33,7 @@ public class AfterFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_after, container, false);
 
-        TextView challengeText = view.findViewById(R.id.challengeText);
+        TextView challengeText = view.findViewById(R.id.titleText);
         challengeText.setText(challengeName);
         showCompletionDialog();
         return view;
