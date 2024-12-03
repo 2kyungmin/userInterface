@@ -40,6 +40,10 @@ public class CommunityFragment extends Fragment {
 
     private List<Review> reviewList;
 
+    public CommunityFragment(List<Review> reviewList) {
+        this.reviewList = reviewList;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -54,29 +58,6 @@ public class CommunityFragment extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.communityList);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(new Adapter(reviewList));
-
-        Date now = new Date();
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(now);
-        calendar.add(Calendar.HOUR, -24);
-        Date dayAgo = calendar.getTime();
-
-        reviewList = new ArrayList<>();
-
-        Application.db.collection("review")
-                .whereGreaterThan("date", dayAgo)
-                .get()
-                .addOnCompleteListener(task -> {
-                    QuerySnapshot result = task.getResult();
-                    if (result != null) {
-                        result.forEach(review -> {
-                            reviewList.add(review.toObject(Review.class));
-                        });
-                    } else {
-                        Toast.makeText(getActivity().getBaseContext(),
-                                "아직 작성된 후기가 없습니다.", Toast.LENGTH_SHORT).show();
-                    }
-                });
     }
 
     private class ViewHolder extends RecyclerView.ViewHolder {
@@ -118,16 +99,26 @@ public class CommunityFragment extends Fragment {
 
             holder.binding.reviewText.setText(review.getText());
             holder.binding.likeCount.setText(String.valueOf(review.getClickNum()));
+
+            holder.binding.likeButton.setOnClickListener(v -> {
+                final int count = Integer.parseInt(holder.binding.likeCount.getText().toString()) + 1;
+                holder.binding.likeCount.setText(String.valueOf(count));
+
+                Thread thread = new Thread(() -> {
+                    Application.db.collection("review")
+                            .document(review.getKey())
+                            .update("clickNum", count);
+
+                });
+                thread.start();
+                holder.binding.likeButton.setClickable(false);
+            });
         }
 
         @Override
         public int getItemCount() {
             return reviewList.size();
         }
-    }
-
-    private void changeReview(List<Review> reviewList) {
-        this.reviewList = reviewList;
     }
 }
 

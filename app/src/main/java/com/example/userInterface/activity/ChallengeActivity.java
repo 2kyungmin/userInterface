@@ -3,10 +3,13 @@ package com.example.userInterface.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -19,14 +22,22 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.LifecycleObserver;
 
+import com.example.userInterface.Application;
 import com.example.userInterface.R;
 import com.example.userInterface.databinding.ActivityChallengeBinding;
+import com.example.userInterface.dto.Review;
 import com.example.userInterface.fragment.AfterFragment;
 import com.example.userInterface.fragment.ChallengeFragment;
 import com.example.userInterface.fragment.CommunityFragment;
 import com.example.userInterface.fragment.DateFragment;
 import com.example.userInterface.fragment.WriteFragment;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 public class ChallengeActivity extends AppCompatActivity {
     private ActivityResultLauncher<Intent> timerResultLauncher;
@@ -38,19 +49,15 @@ public class ChallengeActivity extends AppCompatActivity {
         ActivityChallengeBinding binding = ActivityChallengeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        if (savedInstanceState == null) {
-            // Activity가 처음 실행될 때 challenge Fragment 추가
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            FragmentTransaction transaction = fragmentManager.beginTransaction();
-            transaction.replace(binding.container.getId(), new ChallengeFragment());
-            transaction.commit();
-        }
+        getSupportFragmentManager().beginTransaction()
+                .replace(binding.container.getId(), new ChallengeFragment()).commit();
+
         binding.bottomNavigation.setSelectedItemId(R.id.nav_my_challenge);
         binding.bottomNavigation.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
-            if(isNavigation){
+            if (isNavigation) {
                 if (itemId == R.id.nav_community) {
-                    transferTo(new CommunityFragment(), "community");
+                    getThread().start();
                     return true;
                 }
                 if (itemId == R.id.nav_my_challenge) {
@@ -63,6 +70,10 @@ public class ChallengeActivity extends AppCompatActivity {
                 }
             }
             return false;
+        });
+
+        binding.bottomNavigation.setOnItemReselectedListener(item -> {
+            Log.d("KM", "Navigation reClick");
         });
 
         timerResultLauncher
@@ -99,7 +110,7 @@ public class ChallengeActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         Fragment existingFragment = fragmentManager.findFragmentByTag(tag);
 
-        if(tag.equals("write"))
+        if (tag.equals("write"))
             isNavigation = false;
 
         if (existingFragment == null) {
@@ -111,5 +122,35 @@ public class ChallengeActivity extends AppCompatActivity {
                     .replace(R.id.container, existingFragment)
                     .commit();
         }
+    }
+
+    private Thread getThread(){
+        Handler handler = new Handler(Looper.getMainLooper());
+        Thread getReView = new Thread(() -> {
+            Date now = new Date();
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(now);
+            calendar.add(Calendar.HOUR, -24);
+            Date dayAgo = calendar.getTime();
+            List<Review> reviewList = new ArrayList<>();
+            Application.db.collection("review")
+                    .whereGreaterThan("date", dayAgo)
+                    .get()
+                    .addOnCompleteListener(task -> {
+                        QuerySnapshot result = task.getResult();
+                        if (result != null) {
+                            result.forEach(review -> {
+                                reviewList.add(review.toObject(Review.class));
+                            });
+                            handler.post(() -> {
+                                transferTo(new CommunityFragment(reviewList), "community");
+                            });
+                        } else {
+                            Toast.makeText(getBaseContext(), "24시간내에 작성된 후기가 없습니다.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        });
+        return getReView;
     }
 }

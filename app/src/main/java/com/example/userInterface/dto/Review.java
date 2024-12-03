@@ -40,6 +40,10 @@ public class Review {
     Getter, Setter
      */
 
+    public String getKey() {
+        return this.uId+this.getDate();
+    }
+
     public String getuId() {
         return uId;
     }

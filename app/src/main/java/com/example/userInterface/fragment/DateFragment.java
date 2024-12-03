@@ -32,18 +32,6 @@ public class DateFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ActivityDateBinding binding = ActivityDateBinding.inflate(getLayoutInflater());
-
-//        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
-//
-//        binding.calendarView.setOnDateChangeListener((view, year, month, dayOfMonth) -> {
-//            String selectedDate = year + "-" + (month + 1) + "-" + dayOfMonth;
-//            String review = sharedPreferences.getString(selectedDate, null);
-//
-//            if (review != null) {
-//                binding.reviewTextView.setText(review);
-//            } else {
-//                binding.reviewTextView.setText("해당 날짜에 성취 기록이 없습니다");
-//            }
-//        });
+        
     }
 }
