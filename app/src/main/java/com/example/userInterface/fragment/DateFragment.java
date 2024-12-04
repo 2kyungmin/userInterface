@@ -49,8 +49,8 @@ public class DateFragment extends Fragment {
         Cursor cursor = database.rawQuery("select * from " + DBHelper.TABLE_NAME, null);
         Map<LocalDate, List<String>> map = new HashMap<>();
         while (cursor.moveToNext()) {
-            long timestamp = cursor.getLong(cursor.getColumnIndex("date"));
-            String challengeName = cursor.getString(cursor.getColumnIndex("challengeName"));
+            long timestamp = cursor.getLong(0);
+            String challengeName = cursor.getString(1);
             Date date = new Date(timestamp);
             LocalDate localDate = date.toInstant()
                     .atZone(ZoneId.systemDefault())
