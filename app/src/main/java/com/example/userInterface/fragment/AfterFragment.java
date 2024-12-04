@@ -50,7 +50,10 @@ public class AfterFragment extends Fragment {
         ContentValues values = new ContentValues();
         values.put(DBHelper.COLUMN1, date.getTime());
         values.put(DBHelper.COLUMN2, challengeName);
-        writableDB.insert(DBHelper.NAME, null, values);
+        Thread thread = new Thread(() -> {
+            writableDB.insert(DBHelper.TABLE_NAME, null, values);
+        });
+        thread.start();
         return view;
     }
 
