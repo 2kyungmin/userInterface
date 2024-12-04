@@ -1,7 +1,9 @@
 package com.example.userInterface.fragment;
 
 import android.app.AlertDialog;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,10 +15,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.userInterface.DBHelper;
 import com.example.userInterface.R;
 import com.example.userInterface.activity.MainActivity;
 import com.example.userInterface.activity.ChallengeActivity;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class AfterFragment extends Fragment {
@@ -41,6 +45,12 @@ public class AfterFragment extends Fragment {
         TextView challengeText = view.findViewById(R.id.titleText);
         challengeText.setText(challengeName);
         showCompletionDialog();
+        // history db에 기록
+        SQLiteDatabase writableDB = new DBHelper(getActivity()).getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(DBHelper.COLUMN1, date.getTime());
+        values.put(DBHelper.COLUMN2, challengeName);
+        writableDB.insert(DBHelper.NAME, null, values);
         return view;
     }
 
@@ -48,13 +58,13 @@ public class AfterFragment extends Fragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("챌린지의 후기와, 오늘의 성취도를 기록해보세요!")
                 .setPositiveButton("YES", (dialog, which) -> {
-                    Log.d("KM", "yes: "+challengeName);
-                    if(getActivity() instanceof ChallengeActivity){
+                    Log.d("KM", "yes: " + challengeName);
+                    if (getActivity() instanceof ChallengeActivity) {
                         ((ChallengeActivity) getActivity()).openWrite(challengeName, date);
                     }
                 })
                 .setNegativeButton("NO", (dialog, which) -> {
-                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                    Intent intent = new Intent(getActivity(), ChallengeActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                     getActivity().finish();
