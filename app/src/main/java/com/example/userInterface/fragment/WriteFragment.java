@@ -19,11 +19,14 @@ import android.widget.Toast;
 
 import com.example.userInterface.Application;
 import com.example.userInterface.R;
+import com.example.userInterface.activity.ChallengeActivity;
 import com.example.userInterface.activity.MainActivity;
 import com.example.userInterface.databinding.FragmentWriteBinding;
 import com.example.userInterface.dto.Emoji;
 import com.example.userInterface.dto.Review;
 import com.google.firebase.firestore.DocumentReference;
+
+import java.util.Date;
 
 
 public class WriteFragment extends Fragment {
@@ -31,18 +34,16 @@ public class WriteFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private FragmentWriteBinding binding;
     private String challengeName;
+    private Date date;
     private Emoji emoji;
 
     public WriteFragment() {
 
     }
 
-    public static WriteFragment newInstance(String param1) {
-        WriteFragment fragment = new WriteFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        fragment.setArguments(args);
-        return fragment;
+    public WriteFragment(String challengeName, Date date) {
+        this.challengeName = challengeName;
+        this.date = date;
     }
 
     @Override
@@ -91,13 +92,13 @@ public class WriteFragment extends Fragment {
             }
             Review review = new Review(Application.myUser.getuId(), challengeName,
                     Application.myUser.getName(), emoji.getStr(),
-                    binding.reviewInput.getText().toString(), 0);
+                    binding.reviewInput.getText().toString(), 0, date);
             Log.d("KM", review.toString());
             Application.db.collection("review")
                     .document(review.getuId()+review.getDate()).set(review);
 
-            // 후기를 등록한 후 MainActivity로 이동
-            Intent intent = new Intent(getActivity().getApplicationContext(), MainActivity.class);
+            // 후기를 등록한 후 Challenge Activity로 이동
+            Intent intent = new Intent(getActivity().getApplicationContext(), ChallengeActivity.class);
             intent.addFlags(FLAG_ACTIVITY_CLEAR_TASK | FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         });

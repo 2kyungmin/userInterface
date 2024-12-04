@@ -103,14 +103,7 @@ public class CommunityFragment extends Fragment {
             holder.binding.likeButton.setOnClickListener(v -> {
                 final int count = Integer.parseInt(holder.binding.likeCount.getText().toString()) + 1;
                 holder.binding.likeCount.setText(String.valueOf(count));
-
-                Thread thread = new Thread(() -> {
-                    Application.db.collection("review")
-                            .document(review.getKey())
-                            .update("clickNum", count);
-
-                });
-                thread.start();
+                getThread(count, review).start();
                 holder.binding.likeButton.setClickable(false);
             });
         }
@@ -119,6 +112,16 @@ public class CommunityFragment extends Fragment {
         public int getItemCount() {
             return reviewList.size();
         }
+    }
+
+    private Thread getThread(int count, Review review){
+        Thread thread = new Thread(() -> {
+            Application.db.collection("review")
+                    .document(review.getKey())
+                    .update("clickNum", count);
+
+        });
+        return thread;
     }
 }
 

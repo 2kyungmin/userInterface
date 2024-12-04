@@ -23,7 +23,6 @@ public class Application extends MultiDexApplication {
     public static FirebaseFirestore db;
     public static User myUser;
     public static SharedPreferences myChallenges;
-    public static SharedPreferences.Editor editor;
     public static List<ChallengeChooseFragment> fragments;
 
     public static boolean checkAuth() {
@@ -41,7 +40,6 @@ public class Application extends MultiDexApplication {
         db = FirebaseFirestore.getInstance();
         myUser = new User();
         myChallenges = getSharedPreferences("myChallenges",Context.MODE_PRIVATE);
-        editor = myChallenges.edit();
         fragments = new ArrayList<>();
     }
 

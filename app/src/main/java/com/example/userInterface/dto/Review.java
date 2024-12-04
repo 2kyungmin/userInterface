@@ -14,14 +14,14 @@ public class Review {
     public Review() {
     }
 
-    public Review(String uId, String name, String challengeName, String emoji, String text, int clickNum) {
+    public Review(String uId, String name, String challengeName, String emoji, String text, int clickNum, Date date) {
         this.uId = uId;
         this.name = name;
         this.challengeName = challengeName;
         this.emoji = emoji;
         this.text = text;
         this.clickNum = clickNum;
-        this.date = new Date();
+        this.date = date;
     }
 
     @Override

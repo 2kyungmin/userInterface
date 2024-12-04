@@ -82,7 +82,7 @@ public class ChallengeActivity extends AppCompatActivity {
                     if (o.getResultCode() == Activity.RESULT_OK && o.getData() != null) {
                         String finish = o.getData().getStringExtra("challengeName");
                         Log.d("KM", "Restart: " + finish);
-                        transferTo(new AfterFragment(finish), "after");
+                        transferTo(new AfterFragment(finish, new Date()), "after");
                     }
                 });
 
@@ -99,11 +99,9 @@ public class ChallengeActivity extends AppCompatActivity {
         timerResultLauncher.launch(intent);
     }
 
-    public void openWrite(String challengeName) {
-        Intent intent = new Intent();
-        intent.putExtra("challengeName", challengeName);
+    public void openWrite(String challengeName, Date date) {
         Log.d("KM", "openWrite: " + challengeName);
-        transferTo(WriteFragment.newInstance(challengeName), "write");
+        transferTo(new WriteFragment(challengeName, date), "write");
     }
 
     private void transferTo(Fragment fragment, String tag) {
@@ -127,18 +125,18 @@ public class ChallengeActivity extends AppCompatActivity {
     private Thread getThread(){
         Handler handler = new Handler(Looper.getMainLooper());
         Thread getReView = new Thread(() -> {
-            Date now = new Date();
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(now);
-            calendar.add(Calendar.HOUR, -24);
-            Date dayAgo = calendar.getTime();
+            Date dayAgo = new Date();
+            dayAgo.setDate(dayAgo.getDate()-1);
+
+            Log.d("KM", "dayAgo: "+dayAgo);
+
             List<Review> reviewList = new ArrayList<>();
             Application.db.collection("review")
                     .whereGreaterThan("date", dayAgo)
                     .get()
                     .addOnCompleteListener(task -> {
                         QuerySnapshot result = task.getResult();
-                        if (result != null) {
+                        if (!result.isEmpty()) {
                             result.forEach(review -> {
                                 reviewList.add(review.toObject(Review.class));
                             });
@@ -146,8 +144,12 @@ public class ChallengeActivity extends AppCompatActivity {
                                 transferTo(new CommunityFragment(reviewList), "community");
                             });
                         } else {
-                            Toast.makeText(getBaseContext(), "24시간내에 작성된 후기가 없습니다.",
+                            Log.d("KM", "후기 없음");
+                            Toast.makeText(ChallengeActivity.this, "24시간내에 작성된 후기가 없습니다.",
                                     Toast.LENGTH_SHORT).show();
+                            handler.post(() -> {
+                                transferTo(new CommunityFragment(reviewList), "community");
+                            });
                         }
                     });
         });

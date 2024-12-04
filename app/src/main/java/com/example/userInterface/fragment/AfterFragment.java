@@ -17,11 +17,15 @@ import com.example.userInterface.R;
 import com.example.userInterface.activity.MainActivity;
 import com.example.userInterface.activity.ChallengeActivity;
 
+import java.util.Date;
+
 public class AfterFragment extends Fragment {
     private String challengeName;
+    private Date date;
 
-    public AfterFragment(String challengeName) {
+    public AfterFragment(String challengeName, Date date) {
         this.challengeName = challengeName;
+        this.date = date;
     }
 
     @Override
@@ -45,11 +49,9 @@ public class AfterFragment extends Fragment {
         builder.setTitle("챌린지의 후기와, 오늘의 성취도를 기록해보세요!")
                 .setPositiveButton("YES", (dialog, which) -> {
                     Log.d("KM", "yes: "+challengeName);
-                    WriteFragment writeFragment = WriteFragment.newInstance(challengeName);
-                    getParentFragmentManager().beginTransaction()
-                            .replace(R.id.container, writeFragment)
-                            .addToBackStack(null)
-                            .commit();
+                    if(getActivity() instanceof ChallengeActivity){
+                        ((ChallengeActivity) getActivity()).openWrite(challengeName, date);
+                    }
                 })
                 .setNegativeButton("NO", (dialog, which) -> {
                     Intent intent = new Intent(getActivity(), MainActivity.class);
@@ -58,10 +60,6 @@ public class AfterFragment extends Fragment {
                     getActivity().finish();
                 });
 
-        AlertDialog dialog = builder.create();
-        dialog.show();
-
-        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);  // YES 왼쪽
-        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextAlignment(View.TEXT_ALIGNMENT_VIEW_END);    // NO 오른쪽
+        builder.show();
     }
 }

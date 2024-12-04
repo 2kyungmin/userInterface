@@ -19,7 +19,9 @@ import com.example.userInterface.databinding.FragmentChallengeBinding;
 import com.example.userInterface.dto.Category;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ChallengeFragment extends Fragment {
     private FragmentChallengeBinding binding;
@@ -40,14 +42,12 @@ public class ChallengeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Fragment 추가
-        FragmentManager fragmentManager = getChildFragmentManager();
         FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
 
         if (Application.fragments.isEmpty()) {
             // category에 해당하는 challenge들 획득
             List<String> categories = Application.myUser.getCategories();
-            List<String> challenges = new ArrayList<>();
+            Set<String> challenges = new HashSet<>();
             for (String s : categories) {
                 challenges.addAll(Category.getList(s));
             }
