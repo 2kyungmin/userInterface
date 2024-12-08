@@ -21,8 +21,7 @@ public class TimerActivity extends AppCompatActivity {
     private TextView timerText;
     private Button startButton, resetButton;
     private CountDownTimer countDownTimer;
-    private long timeLeftInMillis = 5000;
-//    private long timeLeftInMillis = 300000;
+    private long timeLeftInMillis = 5000; // 5초로 설정
     private boolean isTimerRunning = false;
 
     @Override
@@ -47,7 +46,6 @@ public class TimerActivity extends AppCompatActivity {
             resetTimer();
         });
 
-
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
@@ -66,12 +64,12 @@ public class TimerActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFinish() {        // 5분 끝났을 때
+            public void onFinish() {
                 Intent resultIntent = new Intent();
                 String challengeName = getIntent().getStringExtra("challengeName");
-                Log.d("KM", "5 Finish: "+challengeName);
+                Log.d("KM", "5 Finish: " + challengeName);
                 resultIntent.putExtra("challengeName", challengeName);
-                setResult(TimerActivity.RESULT_OK, resultIntent);
+                setResult(MainActivity.RESULT_OK, resultIntent);
                 finish();
             }
         }.start();
@@ -89,7 +87,7 @@ public class TimerActivity extends AppCompatActivity {
     }
 
     private void resetTimer() {
-        timeLeftInMillis = 300000;
+        timeLeftInMillis = 300000; // 5분으로 초기화
         updateTimerText();
     }
 
