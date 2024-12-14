@@ -17,10 +17,8 @@ import androidx.fragment.app.Fragment;
 
 import com.example.userInterface.DBHelper;
 import com.example.userInterface.R;
-import com.example.userInterface.activity.MainActivity;
 import com.example.userInterface.activity.ChallengeActivity;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 public class AfterFragment extends Fragment {
@@ -48,10 +46,10 @@ public class AfterFragment extends Fragment {
         // history db에 기록
         SQLiteDatabase writableDB = new DBHelper(getActivity()).getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(DBHelper.COLUMN1, date.getTime());
-        values.put(DBHelper.COLUMN2, challengeName);
+        values.put(DBHelper.COLUMN1_1, date.getTime());
+        values.put(DBHelper.COLUMN1_2, challengeName);
         Thread thread = new Thread(() -> {
-            writableDB.insert(DBHelper.TABLE_NAME, null, values);
+            writableDB.insert(DBHelper.TABLE_NAME1, null, values);
         });
         thread.start();
         return view;

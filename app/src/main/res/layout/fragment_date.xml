@@ -4,22 +4,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/titleText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="30일 챌린지"
-        android:textSize="50sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:layout_marginTop="30dp" />
-
     <CalendarView
         android:id="@+id/calendarView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="130dp" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="500dp"
+        android:layout_marginLeft="20dp"/>
 
     <TextView
         android:id="@+id/reviewTextView"

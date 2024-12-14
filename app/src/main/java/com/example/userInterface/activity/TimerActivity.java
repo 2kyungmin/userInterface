@@ -102,11 +102,11 @@ public class TimerActivity extends AppCompatActivity {
         new AlertDialog.Builder(this)
                 .setTitle("경고")
                 .setMessage("챌린지를 종료하시겠습니까?")
-                .setPositiveButton("YES", (dialog, which) -> {
+                .setPositiveButton("Yes", (dialog, which) -> {
                     pauseTimer();
                     finish();
                 })
-                .setNegativeButton("NO", (dialog, which) -> dialog.dismiss())
+                .setNegativeButton("N", (dialog, which) -> dialog.dismiss())
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
     }

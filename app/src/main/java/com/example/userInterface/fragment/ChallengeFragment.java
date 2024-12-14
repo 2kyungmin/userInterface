@@ -1,5 +1,6 @@
 package com.example.userInterface.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +14,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.userInterface.Application;
+import com.example.userInterface.activity.AddActivity;
+import com.example.userInterface.activity.ChallengeActivity;
 import com.example.userInterface.databinding.FragmentChallengeBinding;
 import com.example.userInterface.dto.Category;
 
@@ -46,7 +49,7 @@ public class ChallengeFragment extends Fragment {
 
             List<String> categories = Application.myUser.getCategories();
             Set<String> challenges = new HashSet<>();
-            for(String str: categories){
+            for (String str : categories) {
                 challenges.addAll(Category.getList(str));
             }
             Application.myChallenges.edit().putStringSet("challengeName", challenges).apply();
@@ -57,7 +60,7 @@ public class ChallengeFragment extends Fragment {
                 Toast.makeText(getActivity().getBaseContext(), "챌린지 목록이 없습니다. 추가해주세요",
                         Toast.LENGTH_SHORT).show();
             } else {
-                for (String s : challenges){
+                for (String s : challenges) {
                     ChallengeChooseFragment challengeChooseFragment
                             = ChallengeChooseFragment.newInstance(s);
                     Application.fragments.add(challengeChooseFragment);
@@ -72,5 +75,9 @@ public class ChallengeFragment extends Fragment {
             fragmentTransaction.commit();
         }
 
+        binding.addButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), AddActivity.class);
+            startActivity(intent);
+        });
     }
 }

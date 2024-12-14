@@ -6,21 +6,13 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
-import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
 import android.widget.Toast;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.LifecycleObserver;
 
 import com.example.userInterface.Application;
 import com.example.userInterface.R;
@@ -31,11 +23,10 @@ import com.example.userInterface.fragment.ChallengeFragment;
 import com.example.userInterface.fragment.CommunityFragment;
 import com.example.userInterface.fragment.DateFragment;
 import com.example.userInterface.fragment.WriteFragment;
-import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -100,9 +91,9 @@ public class ChallengeActivity extends AppCompatActivity {
     }
 
     public void openWrite(String challengeName, Date date) {
-        Log.d("KM", "openWrite: " + challengeName);
         transferTo(new WriteFragment(challengeName, date), "write");
     }
+
 
     private void transferTo(Fragment fragment, String tag) {
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -141,6 +132,7 @@ public class ChallengeActivity extends AppCompatActivity {
                                 reviewList.add(review.toObject(Review.class));
                             });
                             handler.post(() -> {
+                                Collections.reverse(reviewList);
                                 transferTo(new CommunityFragment(reviewList), "community");
                             });
                         } else {

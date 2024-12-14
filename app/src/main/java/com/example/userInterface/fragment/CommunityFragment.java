@@ -26,6 +26,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -33,6 +35,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 
 
@@ -101,7 +104,7 @@ public class CommunityFragment extends Fragment {
             holder.binding.likeCount.setText(String.valueOf(review.getClickNum()));
 
             holder.binding.likeButton.setOnClickListener(v -> {
-                final int count = Integer.parseInt(holder.binding.likeCount.getText().toString()) + 1;
+                int count = Integer.parseInt(holder.binding.likeCount.getText().toString()) + 1;
                 holder.binding.likeCount.setText(String.valueOf(count));
                 getThread(count, review).start();
                 holder.binding.likeButton.setClickable(false);
@@ -118,7 +121,20 @@ public class CommunityFragment extends Fragment {
         Thread thread = new Thread(() -> {
             Application.db.collection("review")
                     .document(review.getKey())
-                    .update("clickNum", count);
+                    .update("clickNum", count)
+                    .addOnSuccessListener(unused -> {
+                        DocumentReference document = Application.db.collection("review")
+                                .document(review.getKey());
+                        document.get().addOnSuccessListener(documentSnapshot -> {
+                            Map<String, Object> data = documentSnapshot.getData();
+                            Log.d("KM", data.get("clickNum").toString());
+                        });
+
+                    })
+                    .addOnFailureListener(e -> {
+                        Log.d("KM", "failure");
+                        Log.d("KM", e.getLocalizedMessage());
+                    });
 
         });
         return thread;

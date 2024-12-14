@@ -90,7 +90,7 @@ public class ChallengeChooseFragment extends Fragment {
                         break;
                     case MotionEvent.ACTION_UP:
                         if (Math.abs(event.getRawY() - initialY) > 300
-                                || Math.abs(event.getRawX() - initialX) > 100) { // 특정 거리 이상 드래그한 경우
+                                || Math.abs(event.getRawX() - initialX) > 300) { // 특정 거리 이상 드래그한 경우
                             // 현재 상단의 프래그먼트를 제거
                             removeTopFragment();
                             v.animate()
@@ -100,15 +100,17 @@ public class ChallengeChooseFragment extends Fragment {
                                     .start();
                             return true;
                         }
-                        // 프래그먼트를 원래 위치로 되돌림
-                        v.animate()
-                                .x(vx)
-                                .y(vy)
-                                .setDuration(300)
-                                .start();
+                        else if(Math.abs(event.getRawY() - initialY) > 30
+                                || Math.abs(event.getRawX() - initialX) > 30){
+                            // 프래그먼트를 원래 위치로 되돌림
+                            v.animate()
+                                    .x(vx)
+                                    .y(vy)
+                                    .setDuration(300)
+                                    .start();
+                            return true;
+                        }
                         break;
-                    default:
-                        return false;
                 }
                 return false;
             }
