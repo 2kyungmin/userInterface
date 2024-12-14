@@ -28,7 +28,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         db.execSQL("create table " + TABLE_NAME2 + "(" +
                 COLUMN2_1 + " varchar(40)," +
-                COLUMN2_2 + " integer");
+                COLUMN2_2 + " integer)");
     }
 
     @Override

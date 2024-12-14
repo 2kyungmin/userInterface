@@ -11,9 +11,11 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.userInterface.DBHelper;
+import com.example.userInterface.R;
 import com.example.userInterface.databinding.DateBinding;
 import com.example.userInterface.databinding.FragmentDateBinding;
 
@@ -31,7 +33,6 @@ public class DateFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -44,6 +45,9 @@ public class DateFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        RecyclerView recyclerView = view.findViewById(R.id.list);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         SQLiteDatabase database = new DBHelper(getActivity()).getReadableDatabase();
         Cursor cursor = database.rawQuery("select * from " + DBHelper.TABLE_NAME1, null);
@@ -67,42 +71,42 @@ public class DateFragment extends Fragment {
                 map.put(localDate, list);
             }
         }
+        Adapter adapter = new Adapter(map, LocalDate.now());
+        recyclerView.setAdapter(adapter);
 
         binding.calendarView.setOnDateChangeListener((view1, year, month, dayOfMonth) -> {
             LocalDate selectedDate = LocalDate.of(year, month + 1, dayOfMonth);
             List<String> challengeNames = map.get(selectedDate);
             Log.d("KM", selectedDate.toString());
 
-            if (challengeNames != null) {
-                binding.reviewTextView.setText(challengeNames.get(0));
-            } else {
-                binding.reviewTextView.setText("");
-            }
+            adapter.updateData(selectedDate);
         });
 
-        LocalDate today = LocalDate.now();
-        List<String> challengeNames = map.get(today);
-        if (challengeNames != null) {
-            binding.reviewTextView.setText(challengeNames.get(0));
-        } else {
-            binding.reviewTextView.setText("");
-        }
+
+        recyclerView.setAdapter(new Adapter(map, LocalDate.now()));
     }
 
     private class ViewHolder extends RecyclerView.ViewHolder {
         private DateBinding binding;
 
         public ViewHolder(DateBinding binding) {
-            super(binding.count);
+            super(binding.getRoot());
             this.binding = binding;
         }
     }
 
-    private class Adapter extends RecyclerView.Adapter<ViewHolder>{
-        private Map<String, Integer> map;
+    private class Adapter extends RecyclerView.Adapter<ViewHolder> {
+        private Map<LocalDate, List<String>> map;
+        private LocalDate selectedDate;
 
-        public Adapter(Map<String, Integer> map) {
+        public Adapter(Map<LocalDate, List<String>> map, LocalDate selectedDate) {
             this.map = map;
+            this.selectedDate = selectedDate;
+        }
+
+        public void updateData(LocalDate newDate) {
+            this.selectedDate = newDate;
+            notifyDataSetChanged();
         }
 
         @NonNull
@@ -115,20 +119,27 @@ public class DateFragment extends Fragment {
         @Override
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-//            SQLiteDatabase database = new DBHelper(getActivity()).getReadableDatabase();
-//            Cursor cursor = database.rawQuery("select * from " + DBHelper.TABLE_NAME2, null);
-//            Map<String, Integer> map = new HashMap<>();
-//            while (cursor.moveToNext()) {
-//                String challengeName = cursor.getString(0);
-//                int count = cursor.getInt(1);
-//                map.put(challengeName, count);
-//            }
+            List<String> names = map.get(selectedDate);
+            String challengeName = names.get(position);
 
+            SQLiteDatabase database = new DBHelper(getActivity()).getReadableDatabase();
+            Cursor cursor = database.rawQuery("select * from " + DBHelper.TABLE_NAME2, null);
+            Map<String, Integer> map = new HashMap<>();
+            while (cursor.moveToNext()) {
+                String dbNames = cursor.getString(0);
+                int count = 0;
+                if (dbNames.equals(challengeName)) {
+                    count = cursor.getInt(1);
+                }
+                holder.binding.challengeName.setText(challengeName);
+                holder.binding.count.setText(String.valueOf(count) + "회 성공");
+            }
         }
 
         @Override
         public int getItemCount() {
-            return map.size();
+            List<String> names = map.get(selectedDate);
+            return names == null ? 0 : names.size();
         }
     }
 }

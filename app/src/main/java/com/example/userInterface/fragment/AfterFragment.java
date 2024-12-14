@@ -43,12 +43,17 @@ public class AfterFragment extends Fragment {
         TextView challengeText = view.findViewById(R.id.titleText);
         challengeText.setText(challengeName);
         showCompletionDialog();
-        // history db에 기록
+
+        // history count db에 기록
         SQLiteDatabase writableDB = new DBHelper(getActivity()).getWritableDatabase();
         ContentValues values = new ContentValues();
+        ContentValues count = new ContentValues();
         values.put(DBHelper.COLUMN1_1, date.getTime());
         values.put(DBHelper.COLUMN1_2, challengeName);
+        count.put(DBHelper.COLUMN2_1, challengeName);
+
         Thread thread = new Thread(() -> {
+
             writableDB.insert(DBHelper.TABLE_NAME1, null, values);
         });
         thread.start();
