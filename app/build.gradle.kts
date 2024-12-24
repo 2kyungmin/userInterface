@@ -53,6 +53,7 @@ dependencies {
     implementation(libs.firebase.firestore.ktx)
     implementation(libs.glide)
     implementation(libs.firebase.ui.storage)
+    implementation(libs.firebase.inappmessaging)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

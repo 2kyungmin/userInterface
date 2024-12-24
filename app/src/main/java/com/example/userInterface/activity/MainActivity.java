@@ -62,10 +62,6 @@ public class MainActivity extends AppCompatActivity {
             getInfo.start();
         }
 
-        binding.googleLogout.setOnClickListener(v -> {
-            Application.logout();
-            recreate();
-        });
 
         ActivityResultLauncher<Intent> launcher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),

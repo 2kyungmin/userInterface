@@ -21,7 +21,7 @@ public class TimerActivity extends AppCompatActivity {
     private TextView timerText;
     private Button startButton, resetButton;
     private CountDownTimer countDownTimer;
-    private long timeLeftInMillis = 5000; // 5초로 설정
+    private long timeLeftInMillis = 300000; // 5초로 설정
     private boolean isTimerRunning = false;
 
     @Override

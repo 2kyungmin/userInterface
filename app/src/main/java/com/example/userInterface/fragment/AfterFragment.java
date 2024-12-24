@@ -3,6 +3,7 @@ package com.example.userInterface.fragment;
 import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,11 +16,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.userInterface.Application;
 import com.example.userInterface.DBHelper;
 import com.example.userInterface.R;
 import com.example.userInterface.activity.ChallengeActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Date;
+import java.util.List;
 
 public class AfterFragment extends Fragment {
     private String challengeName;
@@ -44,17 +50,31 @@ public class AfterFragment extends Fragment {
         challengeText.setText(challengeName);
         showCompletionDialog();
 
-        // history count db에 기록
-        SQLiteDatabase writableDB = new DBHelper(getActivity()).getWritableDatabase();
+            // history count db에 기록
         ContentValues values = new ContentValues();
         ContentValues count = new ContentValues();
         values.put(DBHelper.COLUMN1_1, date.getTime());
         values.put(DBHelper.COLUMN1_2, challengeName);
-        count.put(DBHelper.COLUMN2_1, challengeName);
 
         Thread thread = new Thread(() -> {
-
-            writableDB.insert(DBHelper.TABLE_NAME1, null, values);
+            SQLiteDatabase database = new DBHelper(getActivity()).getWritableDatabase();
+            Cursor cursor = database.rawQuery("select " + DBHelper.COLUMN2_2 + " from "
+                    + DBHelper.TABLE_NAME2 + " where "
+                    + DBHelper.COLUMN2_1 + "= '" + challengeName + "'", null);
+            if (cursor.moveToFirst()) {
+                int num = cursor.getInt(0) + 1;
+                Log.d("KM", "not empty " + challengeName + num);
+                count.put(DBHelper.COLUMN2_2, num);
+                database.update(DBHelper.TABLE_NAME2, count,
+                        DBHelper.COLUMN2_1 + "= '" + challengeName + "'", null);
+            } else {
+                Log.d("KM", "empty " + challengeName);
+                count.put(DBHelper.COLUMN2_1, challengeName);
+                count.put(DBHelper.COLUMN2_2, 1);
+                database.insert(DBHelper.TABLE_NAME2, null, count);
+            }
+            cursor.close();
+            database.insert(DBHelper.TABLE_NAME1, null, values);
         });
         thread.start();
         return view;

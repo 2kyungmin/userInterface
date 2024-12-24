@@ -18,6 +18,7 @@ multidex = "2.0.1"
 navigationFragment = "2.8.3"
 playServicesAuth = "21.2.0"
 viewpager2 = "1.1.0"
+firebaseInappmessaging = "21.0.1"
 
 [libraries]
 firebase-analytics = { module = "com.google.firebase:firebase-analytics", version.ref = "firebaseAnalytics" }
@@ -41,6 +42,7 @@ navigation-fragment = { module = "androidx.navigation:navigation-fragment", vers
 navigation-ui = { module = "androidx.navigation:navigation-ui", version.ref = "navigationFragment" }
 play-services-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "playServicesAuth" }
 viewpager2 = { module = "androidx.viewpager2:viewpager2", version.ref = "viewpager2" }
+firebase-inappmessaging = { group = "com.google.firebase", name = "firebase-inappmessaging", version.ref = "firebaseInappmessaging" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

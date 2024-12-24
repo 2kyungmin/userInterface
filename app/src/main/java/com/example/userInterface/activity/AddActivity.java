@@ -28,10 +28,11 @@ public class AddActivity extends AppCompatActivity {
                     .setTitle("챌린지 추가")
                     .setMessage(newChallenge + "를 추가하시겠습니까?")
                     .setPositiveButton("확인", (dialog, which) -> {
+
                         Application.myChallenges.edit()
-                                .putString("challengeName"+" 5-GO", newChallenge)
+                                .putString("challengeName", newChallenge+" 5-GO")
                                 .apply();
-                        Application.fragments.add(ChallengeChooseFragment.newInstance(newChallenge));
+                        Application.fragments.add(ChallengeChooseFragment.newInstance(newChallenge+" 5-GO"));
                         Intent intent = new Intent(this, ChallengeActivity.class);
                         intent.addFlags(FLAG_ACTIVITY_NEW_TASK | FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);

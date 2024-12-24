@@ -1,5 +1,6 @@
 package com.example.userInterface.fragment;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.userInterface.DBHelper;
 import com.example.userInterface.R;
+import com.example.userInterface.activity.FixActivity;
 import com.example.userInterface.databinding.DateBinding;
 import com.example.userInterface.databinding.FragmentDateBinding;
 
@@ -52,6 +54,7 @@ public class DateFragment extends Fragment {
         SQLiteDatabase database = new DBHelper(getActivity()).getReadableDatabase();
         Cursor cursor = database.rawQuery("select * from " + DBHelper.TABLE_NAME1, null);
         Map<LocalDate, List<String>> map = new HashMap<>();
+
         while (cursor.moveToNext()) {
             long timestamp = cursor.getLong(0);
             String challengeName = cursor.getString(1);
@@ -71,19 +74,21 @@ public class DateFragment extends Fragment {
                 map.put(localDate, list);
             }
         }
+        cursor.close();
         Adapter adapter = new Adapter(map, LocalDate.now());
         recyclerView.setAdapter(adapter);
 
         binding.calendarView.setOnDateChangeListener((view1, year, month, dayOfMonth) -> {
             LocalDate selectedDate = LocalDate.of(year, month + 1, dayOfMonth);
-            List<String> challengeNames = map.get(selectedDate);
             Log.d("KM", selectedDate.toString());
-
             adapter.updateData(selectedDate);
         });
-
-
         recyclerView.setAdapter(new Adapter(map, LocalDate.now()));
+
+        binding.edit.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), FixActivity.class);
+            startActivity(intent);
+        });
     }
 
     private class ViewHolder extends RecyclerView.ViewHolder {
@@ -122,15 +127,14 @@ public class DateFragment extends Fragment {
             List<String> names = map.get(selectedDate);
             String challengeName = names.get(position);
 
+            Log.d("KM", "here: "+names+" "+selectedDate.toString());
             SQLiteDatabase database = new DBHelper(getActivity()).getReadableDatabase();
-            Cursor cursor = database.rawQuery("select * from " + DBHelper.TABLE_NAME2, null);
-            Map<String, Integer> map = new HashMap<>();
+            Cursor cursor = database
+                    .rawQuery("select "+DBHelper.COLUMN2_2+" from " + DBHelper.TABLE_NAME2
+                            +" where "+DBHelper.COLUMN1_2+"=\""+challengeName+"\"", null);
+
             while (cursor.moveToNext()) {
-                String dbNames = cursor.getString(0);
-                int count = 0;
-                if (dbNames.equals(challengeName)) {
-                    count = cursor.getInt(1);
-                }
+                int count = cursor.getInt(0);
                 holder.binding.challengeName.setText(challengeName);
                 holder.binding.count.setText(String.valueOf(count) + "회 성공");
             }

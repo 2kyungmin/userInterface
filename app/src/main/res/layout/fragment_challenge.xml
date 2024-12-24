@@ -38,8 +38,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_margin="16dp"
-        app:backgroundTint="@android:color/white"
         app:icon="@android:drawable/ic_input_add"
+        app:backgroundTint="@android:color/white"
         app:iconTint="@android:color/black"
         app:rippleColor="@android:color/darker_gray" />
 </RelativeLayout>

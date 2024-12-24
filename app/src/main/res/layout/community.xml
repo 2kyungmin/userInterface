@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="16dp">
 
@@ -30,15 +30,19 @@
 
         <TextView
             android:id="@+id/review_text"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:padding="5dp"
             android:background="@android:drawable/editbox_background"
-            android:gravity="start|center_vertical" />
+            android:gravity="start|center_vertical"
+            android:maxLines="2"
+            android:ellipsize="end" />
+
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
@@ -49,7 +53,7 @@
             android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:text="👍"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:backgroundTint="#FFFFFF" />
 
         <TextView
